@@ -1,0 +1,17 @@
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Service.deps.json
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Service.dll
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Service.pdb
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Core.dll
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Repository.dll
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Repository.pdb
+D:\Projeler\Ecommerce\Ecommerce.Service\bin\Debug\net7.0\Ecommerce.Core.pdb
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.csproj.AssemblyReference.cache
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.AssemblyInfoInputs.cache
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.AssemblyInfo.cs
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.csproj.CoreCompileInputs.cache
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.csproj.CopyComplete
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.dll
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\refint\Ecommerce.Service.dll
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.pdb
+D:\Projeler\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\ref\Ecommerce.Service.dll
