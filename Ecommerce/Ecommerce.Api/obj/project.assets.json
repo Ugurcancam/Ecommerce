@@ -3995,40 +3995,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ugurc\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\ugurcan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projeler\\Ecommerce\\Ecommerce.Api\\Ecommerce.Api.csproj",
+      "projectUniqueName": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Api\\Ecommerce.Api.csproj",
       "projectName": "Ecommerce.Api",
-      "projectPath": "D:\\Projeler\\Ecommerce\\Ecommerce.Api\\Ecommerce.Api.csproj",
-      "packagesPath": "C:\\Users\\ugurc\\.nuget\\packages\\",
-      "outputPath": "D:\\Projeler\\Ecommerce\\Ecommerce.Api\\obj\\",
+      "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Api\\Ecommerce.Api.csproj",
+      "packagesPath": "C:\\Users\\ugurcan\\.nuget\\packages\\",
+      "outputPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Api\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ugurc\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ugurcan\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Projeler\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
-              "projectPath": "D:\\Projeler\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj"
+            "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
+              "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj"
             }
           }
         }
@@ -4037,6 +4029,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -4069,6 +4066,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[7.0.18, 7.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[7.0.18, 7.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[7.0.18, 7.0.18]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.18, 7.0.18]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4077,7 +4092,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }
