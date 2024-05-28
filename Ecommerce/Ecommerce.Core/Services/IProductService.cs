@@ -10,6 +10,9 @@ namespace Ecommerce.Core.Services
 {
     public interface IProductService : IService<Product>
     {
-        Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory();
+        //For API
+        Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI();
+        //For MVC
+        Task<List<ProductWithCategoryDto>> GetProductsWithCategory();
     }
 }

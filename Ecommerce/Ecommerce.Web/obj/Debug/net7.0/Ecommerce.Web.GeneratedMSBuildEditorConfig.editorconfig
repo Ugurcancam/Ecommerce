@@ -9,43 +9,105 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Ecommerce.Web
 build_property.RootNamespace = Ecommerce.Web
-build_property.ProjectDir = D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.ProjectDir = C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web
+build_property.MSBuildProjectDirectory = C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Home/Index.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/AddCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/AddProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/Categories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcmllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/Products.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/UpdateCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBkYXRlQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Admin/UpdateProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXBkYXRlUHJvZHVjdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Home/Privacy.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Product/Index.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/Error.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_FooterAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXJBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_HeaderAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9IZWFkZXJBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_LayoutAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_NavbarAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXZiYXJBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/_ViewImports.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/_ViewStart.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_Layout.cshtml]
+[C:/Users/ugurc/OneDrive/Belgeler/GitHub/ECommerce-with-API/Ecommerce/Ecommerce.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-cwwae2esf8

@@ -21,3 +21,15 @@ D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\refint\Ecommerce.Core.dll
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.pdb
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\ref\Ecommerce.Core.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\bin\Debug\net7.0\Ecommerce.Core.deps.json
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\bin\Debug\net7.0\Ecommerce.Core.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\bin\Debug\net7.0\Ecommerce.Core.pdb
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.AssemblyInfoInputs.cache
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.AssemblyInfo.cs
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.csproj.CoreCompileInputs.cache
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\refint\Ecommerce.Core.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.pdb
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\ref\Ecommerce.Core.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.csproj.AssemblyReference.cache

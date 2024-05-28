@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj": {}
+    "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
+    "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
+        "projectUniqueName": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
         "projectName": "Ecommerce.Core",
-        "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
-        "packagesPath": "C:\\Users\\ugurcan\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\obj\\",
+        "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj",
+        "packagesPath": "C:\\Users\\ugurc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ugurcan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ugurc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -32,16 +32,21 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0-preview.4.24267.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,40 +58,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj": {
+    "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj",
         "projectName": "Ecommerce.Repository",
-        "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj",
-        "packagesPath": "C:\\Users\\ugurcan\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\obj\\",
+        "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj",
+        "packagesPath": "C:\\Users\\ugurc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ugurcan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ugurc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -98,8 +89,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
-                "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj"
+              "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj": {
+                "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Core\\Ecommerce.Core.csproj"
               }
             }
           }
@@ -108,11 +99,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -145,40 +131,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
+    "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj",
+        "projectUniqueName": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj",
         "projectName": "Ecommerce.Service",
-        "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj",
-        "packagesPath": "C:\\Users\\ugurcan\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\obj\\",
+        "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj",
+        "packagesPath": "C:\\Users\\ugurc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ugurcan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ugurc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -190,8 +162,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj": {
-                "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj"
+              "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj": {
+                "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Repository\\Ecommerce.Repository.csproj"
               }
             }
           }
@@ -200,11 +172,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -227,40 +194,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj": {
+    "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj",
+        "projectUniqueName": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj",
         "projectName": "Ecommerce.Web",
-        "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj",
-        "packagesPath": "C:\\Users\\ugurcan\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\obj\\",
+        "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj",
+        "packagesPath": "C:\\Users\\ugurc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ugurcan\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ugurc\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -272,8 +225,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
-                "projectPath": "D:\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj"
+              "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj": {
+                "projectPath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Service\\Ecommerce.Service.csproj"
               }
             }
           }
@@ -282,11 +235,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -311,24 +259,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.18, 7.0.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -337,7 +267,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

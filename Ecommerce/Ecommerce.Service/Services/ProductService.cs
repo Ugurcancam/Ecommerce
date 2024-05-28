@@ -26,11 +26,20 @@ namespace Ecommerce.Service.Services
 
         }
 
-        public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategory()
+        //For API
+        public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI()
         {
             var products = await _productRepository.GetProductsWithCategory();
             var productsDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
-            return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200,productsDto);
+            return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
+        }
+        //For MVC
+
+        async Task<List<ProductWithCategoryDto>> IProductService.GetProductsWithCategory()
+        {
+            var products = await _productRepository.GetProductsWithCategory();
+            var productsDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
+            return productsDto;
         }
     }
-} 
+}

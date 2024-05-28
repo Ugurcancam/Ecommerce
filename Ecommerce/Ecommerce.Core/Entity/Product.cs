@@ -19,7 +19,6 @@ namespace Ecommerce.Core.Entity
         // public bool? IsBestSelling { get; set; }
         // public bool? InStock { get; set; }
         // public bool? IsActive { get; set; }
-
         //İlişkisel
         public int CategoryId { get; set; }
         public Category Category { get; set; }

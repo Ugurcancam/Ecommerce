@@ -1,4 +1,5 @@
 using System.Reflection;
+using Ecommerce.Core.Entity;
 using Ecommerce.Core.Repositories;
 using Ecommerce.Core.Services;
 using Ecommerce.Core.UnitOfWorks;
@@ -7,6 +8,7 @@ using Ecommerce.Repository.Repositories;
 using Ecommerce.Repository.UnitOfWorks;
 using Ecommerce.Service.Mapping;
 using Ecommerce.Service.Services;
+using Ecommerce.Web.Mapping;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,10 +24,13 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(MapProfileWeb).Assembly);
+
+builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnectionLaptop"), option =>
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
     {
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
     });
@@ -44,11 +49,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Admin}/{action=Products}/{id?}");
 
 app.Run();
