@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Ecommerce.Core.Entity
 {
-    public class AppRole : IdentityRole<int>
+    public class AppRole : IdentityRole<string>
     {
         
     }

@@ -1,7 +1,7 @@
 <header class="top-header">
     <nav class="navbar navbar-expand-xl w-100 navbar-dark container gap-3">
-        <a class="navbar-brand d-none d-xl-inline" href="index.html"><img src="~/home_assets/images/logo.webp" class="logo-img"
-                alt=""></a>
+        <a class="navbar-brand d-none d-xl-inline" asp-action="Index"><img src="~/home_assets/images/logo.webp"
+                class="logo-img" alt=""></a>
         <a class="mobile-menu-btn d-inline d-xl-none" href="javascript:;" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar">
             <i class="bi bi-list"></i>
@@ -16,7 +16,7 @@
             <div class="offcanvas-body primary-menu">
                 <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" asp-action="Index">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html"
@@ -86,7 +86,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="cart.html">Shop Cart</a></li>
-                            <li><a class="dropdown-item" href="wishlist.html">Wishlist</a></li>
+                            <li><a class="dropdown-item" asp-action="Favorites">Wishlist</a></li>
                             <li><a class="dropdown-item" href="product-details.html">Product Details</a></li>
                             <li><a class="dropdown-item" href="payment-method.html">Payment Method</a></li>
                             <li><a class="dropdown-item" href="billing-details.html">Billing Details</a></li>
@@ -109,7 +109,7 @@
                             Account
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="account-dashboard.html">Dashboard</a></li>
+                            <li><a class="dropdown-item" asp-action="Dashboard">Dashboard</a></li>
                             <li><a class="dropdown-item" href="account-orders.html">My Orders</a></li>
                             <li><a class="dropdown-item" href="account-profile.html">My Profile</a></li>
                             <li><a class="dropdown-item" href="account-edit-profile.html">Edit Profile</a></li>
@@ -147,17 +147,14 @@
                 <a class="nav-link" href="search.html"><i class="bi bi-search"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="wishlist.html"><i class="bi bi-suit-heart"></i></a>
+                <a class="nav-link" asp-action="Favorites"><i class="bi bi-suit-heart"></i></a>
             </li>
-            <li class="nav-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
-                <a class="nav-link position-relative" href="javascript:;">
-                    <div class="cart-badge">8</div>
-                    <i class="bi bi-basket2"></i>
-                </a>
-            </li>
+            @await Component.InvokeAsync("BasketItemCountHeader")
             <li class="nav-item">
-                <a class="nav-link" href="account-dashboard.html"><i class="bi bi-person-circle"></i></a>
+                <a class="nav-link" asp-action="Dashboard"><i class="bi bi-person-circle"></i></a>
             </li>
         </ul>
     </nav>
 </header>
+
+@await Component.InvokeAsync("BasketHeader")

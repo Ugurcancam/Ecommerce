@@ -33,3 +33,4 @@ C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.C
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.pdb
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\ref\Ecommerce.Core.dll
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.csproj.AssemblyReference.cache
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Core\obj\Debug\net7.0\Ecommerce.Core.sourcelink.json

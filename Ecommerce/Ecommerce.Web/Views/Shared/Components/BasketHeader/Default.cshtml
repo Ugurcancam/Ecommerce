@@ -1,0 +1,46 @@
+@model IEnumerable<BasketItemViewModel>
+@{
+    Layout = null;
+    var basketItemCount = Model.Count();
+    var count = 0;
+}
+
+<!--start cart-->
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header bg-section-2">
+        <h5 class="mb-0 fw-bold" id="offcanvasRightLabel">@basketItemCount items in the cart</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="cart-list">
+            @foreach (var product in Model)
+            {
+                count++;
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bottom-product-img">
+                        <a href="product-details.html">
+                            <img src="~/home_assets/images/new-arrival/@($"{count:00}.webp")" width="60" alt="">
+                        </a>
+                    </div>
+                    <div class="">
+                        <h6 class="mb-0 fw-light mb-1">@product.Name</h6>
+                        <p class="mb-0"><strong>@product.Quantity X @product.Price</strong>
+                        </p>
+                    </div>
+                    <div class="ms-auto fs-5">
+                        <a asp-action="RemoveProductFromBasket" asp-route-productId="@product.ProductId" class="link-dark"><i class="bi bi-trash"></i></a>
+                    </div>
+                </div>
+                <hr>
+            }
+        </div>
+    </div>
+    <div class="offcanvas-footer p-3 border-top">
+        <div class="d-grid">
+            <button type="button" class="btn btn-lg btn-dark btn-ecomm px-5 py-3">Checkout</button>
+        </div>
+    </div>
+
+</div>
+<!--end cat-->

@@ -167,3 +167,6 @@ D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\refint\Eco
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\Ecommerce.Api.pdb
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\Ecommerce.Api.genruntimeconfig.cache
 D:\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\ref\Ecommerce.Api.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\Ecommerce.Api.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\refint\Ecommerce.Api.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Api\obj\Debug\net7.0\Ecommerce.Api.pdb

@@ -1,0 +1,22 @@
+@model IEnumerable<BasketItemViewModel>
+@{
+    Layout = null;
+    var basketItemCount = Model.Count();
+}
+@if (basketItemCount != 0)
+{
+    <li class="nav-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+        <a class="nav-link position-relative" href="javascript:;">
+            <div class="cart-badge">@basketItemCount</div>
+            <i class="bi bi-basket2"></i>
+        </a>
+    </li>
+}
+else
+{
+    <li class="nav-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">
+        <a class="nav-link position-relative" href="javascript:;">
+            <i class="bi bi-basket2"></i>
+        </a>
+    </li>
+}

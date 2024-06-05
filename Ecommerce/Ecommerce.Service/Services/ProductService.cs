@@ -33,8 +33,8 @@ namespace Ecommerce.Service.Services
             var productsDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
             return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
         }
+    
         //For MVC
-
         async Task<List<ProductWithCategoryDto>> IProductService.GetProductsWithCategory()
         {
             var products = await _productRepository.GetProductsWithCategory();

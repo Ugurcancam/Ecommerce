@@ -50,3 +50,4 @@ C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.S
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\refint\Ecommerce.Service.dll
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.pdb
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\ref\Ecommerce.Service.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Service\obj\Debug\net7.0\Ecommerce.Service.sourcelink.json

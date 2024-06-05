@@ -50,3 +50,4 @@ C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.R
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Repository\obj\Debug\net7.0\Ecommerce.Repository.pdb
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Repository\obj\Debug\net7.0\Ecommerce.Repository.genruntimeconfig.cache
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Repository\obj\Debug\net7.0\ref\Ecommerce.Repository.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Repository\obj\Debug\net7.0\Ecommerce.Repository.sourcelink.json

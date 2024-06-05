@@ -1,5 +1,7 @@
+@using System.Security.Claims
 @{
     Layout = "_LayoutAdmin"; 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
  <div class="main-content-inner">
                             <!-- main-content-wrap -->
@@ -20,7 +22,7 @@
                                                 </div>
                                                 <div>
                                                     <div class="body-text mb-2">Total Sales</div>
-                                                    <h4>34,945</h4>
+                                                    <h4>@userId</h4>
                                                 </div>
                                             </div>
                                             <div class="box-icon-trending up">

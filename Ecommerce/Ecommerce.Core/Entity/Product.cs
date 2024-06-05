@@ -11,6 +11,15 @@ namespace Ecommerce.Core.Entity
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+
+        //İlişkisel
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+        public ProductFeature ProductFeature { get; set; }
+        public ICollection<Favorite> Favorites { get; set; } // Favori ile ilişki
+        public ICollection<BasketItem> BasketItems { get; set; } // Sepetle ilişki
+
+        // İleride eklenecek özellikler
         // public string? ImageUrl { get; set; }
         // public string? ImageUrl2 { get; set; }
         // public string? ImageUrl3 { get; set; }
@@ -19,9 +28,5 @@ namespace Ecommerce.Core.Entity
         // public bool? IsBestSelling { get; set; }
         // public bool? InStock { get; set; }
         // public bool? IsActive { get; set; }
-        //İlişkisel
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ProductFeature ProductFeature { get; set; }
     }
 }

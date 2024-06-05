@@ -4,6 +4,8 @@ using Ecommerce.Web.Models;
 using Ecommerce.Core.Entity;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
+using Ecommerce.Core.Services;
+using System.Security.Claims;
 
 namespace Ecommerce.Web.Controllers;
 
@@ -13,18 +15,109 @@ public class HomeController : Controller
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly IMapper _mapper;
+    private readonly IProductService _productService;
+    private readonly IFavoriteService _favoriteService;
+    private readonly IBasketService _basketService;
 
-    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper)
+    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService)
     {
+
         _userManager = userManager;
         _signInManager = signInManager;
         _mapper = mapper;
-    }
-    public IActionResult Index()
-    {
-        return View();
+        _productService = productService;
+        _favoriteService = favoriteService;
+        _basketService = basketService;
     }
 
+
+    public async Task<IActionResult> Index()
+    {
+        return View(await _productService.GetAllAsync());
+    }
+    public async Task<IActionResult> Favorites()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        var favoriteProducts = await _favoriteService.GetFavorites(userId);
+
+        var model = favoriteProducts.Select(product => new FavoriteProductViewModel
+        {
+            ProductId = product.ProductId,
+            Name = product.Product.Name,
+            Description = product.Product.Description,
+            Price = product.Product.Price
+        }).ToList();
+
+        return View(model);
+    }
+    public async Task<IActionResult> AddProductToFavorite(int productId)
+    {
+        //Get the logged in users id
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        await _favoriteService.AddFavorite(userId, productId); // Pass the converted userId as an argument
+        return RedirectToAction("Index");
+    }
+    public async Task<IActionResult> RemoveProductFromFavorite(int productId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        await _favoriteService.RemoveFavorite(userId, productId);
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Basket()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        var basket = await _basketService.GetBasketByUserIdAsync(userId);
+        var model = basket.BasketItems.Select(ci => new BasketItemViewModel
+        {
+            ProductId = ci.ProductId,
+            Name = ci.Product.Name,
+            Price = ci.Product.Price,
+            Quantity = ci.Quantity
+        }).ToList();
+
+        return View(model);
+    }
+    //Daha sonra quantity parametresi eklenecek
+    public async Task<IActionResult> AddProductToBasket(int productId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        await _basketService.AddToBasketAsync(userId, productId, 1);
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> RemoveProductFromBasket(int productId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        await _basketService.RemoveFromBasketAsync(userId, productId);
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Dashboard()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        return View();
+    }
     public IActionResult Login()
     {
         return View();
@@ -36,7 +129,7 @@ public class HomeController : Controller
         var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
         if (result.Succeeded)
         {
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Home");
         }
         return View();
     }
@@ -49,6 +142,7 @@ public class HomeController : Controller
     {
         var user = new AppUser()
         {
+            Id = Guid.NewGuid().ToString(),
             Name = model.Name,
             Surname = model.Surname,
             Email = model.Email,
@@ -57,7 +151,7 @@ public class HomeController : Controller
         var result = await _userManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Home");
         }
 
         foreach (var error in result.Errors)
@@ -72,6 +166,6 @@ public class HomeController : Controller
     {
         await _signInManager.SignOutAsync();
         System.Console.WriteLine("User logged out");
-        return RedirectToAction("Login", "Account");
+        return RedirectToAction("Index", "Home");
     }
 }

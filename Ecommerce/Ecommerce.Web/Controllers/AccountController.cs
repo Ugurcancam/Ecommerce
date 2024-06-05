@@ -46,6 +46,7 @@ namespace Ecommerce.Web.Controllers
         {
             var user = new AppUser()
             {
+                Id = Guid.NewGuid().ToString(),
                 Name = model.Name,
                 Surname = model.Surname,
                 Email = model.Email,

@@ -1,4 +1,4 @@
-
+@model UserViewModel
 @{
     Layout = "_Layout";
 }
@@ -45,15 +45,15 @@
                             <p class="mb-0 fw-bold">Or</p>
                             <div class="line"></div>
                         </div>
-                        <form>
+                        <form method="post" asp-action="Login">
                             <div class="row g-4">
                                 <div class="col-12">
-                                    <label for="exampleUsername" class="form-label">E Posta</label>
-                                    <input type="text" class="form-control rounded-0" id="exampleUsername">
+                                    <label class="form-label">Email</label>
+                                    <input asp-for="Email" type="text" class="form-control rounded-0">
                                 </div>
                                 <div class="col-12">
-                                    <label for="examplePassword" class="form-label">Şifre</label>
-                                    <input type="text" class="form-control rounded-0" id="examplePassword">
+                                    <label class="form-label">Şifre</label>
+                                    <input asp-for="Password" type="password" class="form-control rounded-0">
                                 </div>
                                 <div class="col-12">
                                     <a href="javascript:;" class="text-content btn bg-light rounded-0 w-100"><i
@@ -63,7 +63,8 @@
                                     <hr class="my-0">
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-dark rounded-0 btn-ecomm w-100">Giriş Yap</button>
+                                    <button type="submit" class="btn btn-dark rounded-0 btn-ecomm w-100">Giriş
+                                        Yap</button>
                                 </div>
                                 <div class="col-12 text-center">
                                     <p class="mb-0 rounded-0 w-100">Hesabın yok mu? <a asp-action="Register"

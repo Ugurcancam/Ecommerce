@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QXJ8rtQRSsPFUjl3Og3SgkDJdy7XMTlo+g67bEm22YkVFDlTdWMvYXehq7qAJh43kol80cDB06XblW4HfXF3nQ==",
+  "dgSpecHash": "cBSZspnTHEhmwVFhuCRA7hO1PS3dOO0sGQCjJffnn+K/bhi4HVzeQZE6yF/h8hXW4vCDhklQaMRcJBKNwib1Og==",
   "success": true,
   "projectFilePath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Api\\Ecommerce.Api.csproj",
   "expectedPackageFiles": [
@@ -111,7 +111,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Ecommerce.Core depends on Microsoft.AspNetCore.Identity.EntityFrameworkCore (>= 7.0.0-preview.4.24267.6) but Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.4.24267.6 was not found. An approximate best match of Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.5.22303.8 was resolved.",
+      "message": "Ecommerce.Core, Microsoft.AspNetCore.Identity.EntityFrameworkCore (>= 7.0.0-preview.4.24267.6) öğesine bağımlı ancak Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.4.24267.6 bulunamadı. Yaklaşık bir en iyi eşleşme olan Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.5.22303.8 çözümlendi.",
       "libraryId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
       "targetGraphs": [
         "net7.0"
