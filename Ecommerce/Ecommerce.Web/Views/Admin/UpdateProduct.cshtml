@@ -99,48 +99,40 @@
                         pictures you add, comply with the background color standards. Pictures must be in certain
                         dimensions. Notice that the product shows all the details</div>
                 </fieldset>
-                <div class="cols gap22">
-                    <fieldset class="name">
-                        <div class="body-title mb-10">Add size</div>
-                        <div class="select mb-10">
-                            <select class="">
-                                <option>EU - 44</option>
-                                <option>EU - 40</option>
-                                <option>EU - 50</option>
-                            </select>
-                        </div>
-                        <div class="list-box-value mb-10">
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 38.5</div>
+                <div class="right flex-grow wg-box">
+                    <fieldset class="">
+                        <div class="body-title mb-10">Ürün Aktifliği</div>
+                        <div class="radio-buttons">
+                            <div class="item">
+                                <input type="radio" name="IsActive" id="isActive1" value="true" @(Model.IsActive==true ? "checked"
+                                    : "" )>
+                                <label for="isActive1"><span class="body-title-2">Aktif</span></label>
                             </div>
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 39</div>
-                            </div>
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 40</div>
-                            </div>
-                        </div>
-                        <div class="list-box-value">
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 41.5</div>
-                            </div>
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 42</div>
-                            </div>
-                            <div class="box-value-item">
-                                <div class="body-text">EU - 43</div>
+                            <div class="item">
+                                <input type="radio" name="IsActive" id="isActive2" value="false" @(Model.IsActive==false ? "checked"
+                                    : "" )>
+                                <label for="isActive2"><span class="body-title-2">Pasif</span></label>
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset class="name">
-                        <div class="body-title mb-10">Product date</div>
-                        <div class="select">
-                            <input type="date" name="date" value="2023-11-20">
+                    <fieldset class="mb-24">
+                        <div class="body-title mb-10">Stok Durumu</div>
+                        <div class="radio-buttons">
+                            <div class="item">
+                                <input type="radio" name="InStock" id="inStock1" value="true" @(Model.InStock==true ? "checked" : ""
+                                    )>
+                                <label for="inStock1"><span class="body-title-2">Stokta Var</span></label>
+                            </div>
+                            <div class="item">
+                                <input type="radio" name="InStock" id="inStock2" value="false" @(Model.InStock==false ? "checked"
+                                    : "" )>
+                                <label for="inStock2"><span class="body-title-2">Tükendi</span></label>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
                 <div class="cols gap10">
-                    <button class="tf-button w-full" type="submit">Add product</button>
+                    <button class="tf-button w-full" type="submit">Kaydet</button>
                     @* <button class="tf-button style-1 w-full" type="submit">Save product</button> *@
                     <a href="#" class="tf-button style-2 w-full">Schedule</a>
                 </div>

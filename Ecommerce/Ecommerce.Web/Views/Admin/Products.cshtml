@@ -75,7 +75,7 @@
                         <div class="body-title">Fiyat</div>
                     </li>
                     <li>
-                        <div class="body-title">Miktar</div>
+                        <div class="body-title">Stok</div>
                     </li>
                     <li>
                         <div class="body-title">Kategori</div>
@@ -101,13 +101,22 @@
                                 <div class="name">
                                     <a href="product-list.html" class="body-title-2">@product.Name</a>
                                 </div>
-                                <div class="body-text">@product.Id</div>
+                                <div class="body-text">@product.Id</div> 
                                 <div class="body-text">@product.Price₺</div>
-                                <div class="body-text">1,638</div>
+                                <div class="body-text">@product.Stock</div>
                                 <div class="body-text">@product.Category.Name</div>
-                                <div>
-                                    <div class="block-not-available">Out of stock</div>
-                                </div>
+                                @if (product.InStock == true) 
+                                {
+                                    <div>
+                                        <div class="block-available">Stokta Var</div> 
+                                    </div>
+                                }
+                                else if (product.InStock == false || product.Stock == 0)
+                                {
+                                    <div>
+                                        <div class="block-not-available">Stokta Yok</div>
+                                    </div>
+                                }
 
                                 <div class="list-icon-function">
                                     <div class="item eye">

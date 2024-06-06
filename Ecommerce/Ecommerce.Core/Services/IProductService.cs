@@ -14,5 +14,6 @@ namespace Ecommerce.Core.Services
         Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI();
         //For MVC
         Task<List<ProductWithCategoryDto>> GetProductsWithCategory();
+        Task<List<Product>> GetActiveProductsWithCategory();
     }
 }

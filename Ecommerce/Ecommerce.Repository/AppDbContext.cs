@@ -57,16 +57,40 @@ namespace Ecommerce.Repository
         {
             foreach (var entry in ChangeTracker.Entries())
             {
-                if (entry.Entity is BaseEntity entity)
-                {
 
+                if (entry.Entity is Product entity)
+                {
+                    // Product'den türeyen entity'lerde CreatedAt property'si eklenirken şuanki zamanı atıyoruz.
                     if (entry.State == EntityState.Added)
                     {
                         entity.CreatedAt = DateTime.Now;
                     }
+                    // Product'den türeyen entity'lerde CreatedAt property'si güncellenirken değişmemesi için CreatedAt property'si modifiye edilmez.
                     else if (entry.State == EntityState.Modified)
                     {
                         Entry(entity).Property(x => x.CreatedAt).IsModified = false;
+                    }
+                }
+                // Product entity'si eklenirken IsActive true olacak
+                if(entry.Entity is Product productEntity)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        productEntity.IsActive = true;
+                        productEntity.InStock = true;
+                        if(productEntity.Stock == 0)
+                        {
+                            productEntity.InStock = false;
+                        }
+                    }else if (entry.State == EntityState.Modified)
+                    {
+                        if(productEntity.Stock == 0)
+                        {
+                            productEntity.InStock = false;
+                        }else if (productEntity.Stock > 0)
+                        {
+                            productEntity.InStock = true;
+                        }
                     }
                 }
 
@@ -77,7 +101,7 @@ namespace Ecommerce.Repository
         {
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
             {
-                if (entry.Entity is BaseEntity entity)
+                if (entry.Entity is Product entity)
                 {
                     entity.CreatedAt = DateTime.Now;
 

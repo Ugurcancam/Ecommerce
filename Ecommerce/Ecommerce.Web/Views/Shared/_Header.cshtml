@@ -18,67 +18,7 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html"
-                            data-bs-toggle="dropdown">
-                            Categories
-                        </a>
-                        <div class="dropdown-menu dropdown-large-menu">
-                            <div class="row">
-                                <div class="col-12 col-xl-4">
-                                    <h6 class="large-menu-title">Fashion</h6>
-                                    <ul class="list-unstyled">
-                                        <li><a href="javascript:;">Casual T-Shirts</a>
-                                        </li>
-                                        <li><a href="javascript:;">Formal Shirts</a>
-                                        </li>
-                                        <li><a href="javascript:;">Jackets</a>
-                                        </li>
-                                        <li><a href="javascript:;">Jeans</a>
-                                        </li>
-                                        <li><a href="javascript:;">Dresses</a>
-                                        </li>
-                                        <li><a href="javascript:;">Sneakers</a>
-                                        </li>
-                                        <li><a href="javascript:;">Belts</a>
-                                        </li>
-                                        <li><a href="javascript:;">Sports Shoes</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- end col-3 -->
-                                <div class="col-12 col-xl-4">
-                                    <h6 class="large-menu-title">Electronics</h6>
-                                    <ul class="list-unstyled">
-                                        <li><a href="javascript:;">Mobiles</a>
-                                        </li>
-                                        <li><a href="javascript:;">Laptops</a>
-                                        </li>
-                                        <li><a href="javascript:;">Macbook</a>
-                                        </li>
-                                        <li><a href="javascript:;">Televisions</a>
-                                        </li>
-                                        <li><a href="javascript:;">Lighting</a>
-                                        </li>
-                                        <li><a href="javascript:;">Smart Watch</a>
-                                        </li>
-                                        <li><a href="javascript:;">Galaxy Phones</a>
-                                        </li>
-                                        <li><a href="javascript:;">PC Monitors</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- end col-3 -->
-                                <div class="col-12 col-xl-4 d-none d-xl-block">
-                                    <div class="pramotion-banner1">
-                                        <img src="~/home_assets/images/menu-img.webp" class="img-fluid" alt="">
-                                    </div>
-                                </div>
-                                <!-- end col-3 -->
-                            </div>
-                            <!-- end row -->
-                        </div>
-                    </li>
+                    @await Component.InvokeAsync("CategoriesHeader")
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
                             data-bs-toggle="dropdown">
@@ -149,7 +89,7 @@
             <li class="nav-item">
                 <a class="nav-link" asp-action="Favorites"><i class="bi bi-suit-heart"></i></a>
             </li>
-            @await Component.InvokeAsync("BasketItemCountHeader")
+             @await Component.InvokeAsync("BasketItemCountHeader") 
             <li class="nav-item">
                 <a class="nav-link" asp-action="Dashboard"><i class="bi bi-person-circle"></i></a>
             </li>
@@ -157,4 +97,4 @@
     </nav>
 </header>
 
-@await Component.InvokeAsync("BasketHeader")
+ @await Component.InvokeAsync("BasketHeader") 

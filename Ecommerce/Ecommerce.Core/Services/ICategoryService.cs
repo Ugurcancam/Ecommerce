@@ -10,6 +10,6 @@ namespace Ecommerce.Core.Services
 {
     public interface ICategoryService : IService<Category>
     {
-        Task<CustomResponseDto<CategoryWithProductsDto>> GetWithProductsByIdAsync(int categoryId);
+        Task<CategoryWithProductsDto> GetWithProductsByIdAsync(int categoryId);
     }
 }

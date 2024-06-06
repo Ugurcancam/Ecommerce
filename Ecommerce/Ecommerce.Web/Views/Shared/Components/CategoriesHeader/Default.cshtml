@@ -1,0 +1,30 @@
+@model List<Category>
+
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="tv-shows.html" data-bs-toggle="dropdown">
+        Categories
+    </a>
+    <div class="dropdown-menu dropdown-large-menu">
+        <div class="row">
+            <div class="col-12 col-xl-4">
+
+                <ul class="list-unstyled">
+                    @foreach (var category in Model)
+                    {
+                        <li><a asp-action="CategoryWithProducts" asp-route-categoryId="@category.Id">@category.Name</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- end col-3 -->
+            <div class="col-12 col-xl-4 d-none d-xl-block">
+                <div class="pramotion-banner1">
+                    <img src="~/home_assets/images/menu-img.webp" class="img-fluid" alt="">
+                </div>
+            </div>
+            <!-- end col-3 -->
+        </div>
+        <!-- end row -->
+    </div>
+</li>

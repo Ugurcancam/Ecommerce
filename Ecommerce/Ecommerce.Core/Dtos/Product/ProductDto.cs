@@ -12,5 +12,8 @@ namespace Ecommerce.Core.Dtos.Product
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public int CategoryId { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? InStock { get; set; }
+        public Entity.Category Category { get; set; }
     }
 }

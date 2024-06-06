@@ -20,19 +20,19 @@ namespace Ecommerce.Web.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
-                //return to login
-                return View();
+                //Sayfada kullanıcı girişi yapmamışsa boş sepet döndür, sepet count'larını gösterdiğimizden dolayı çökmemesi için boş bir model döndürmemiz lazım.
+                return View(new List<BasketItemViewModel>());
             }
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
-            var model = basket.BasketItems.Select(ci => new BasketItemViewModel
+            var model = basket.BasketItems.Select(p => new BasketItemViewModel
             {
-                ProductId = ci.ProductId,
-                Name = ci.Product.Name,
-                Price = ci.Product.Price,
-                Quantity = ci.Quantity
+                ProductId = p.ProductId,
+                Name = p.Product.Name,
+                Price = p.Product.Price,
+                Quantity = p.Quantity
             }).ToList();
 
             return View(model);

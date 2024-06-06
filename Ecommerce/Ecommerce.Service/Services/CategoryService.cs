@@ -23,11 +23,11 @@ namespace Ecommerce.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<CustomResponseDto<CategoryWithProductsDto>> GetWithProductsByIdAsync(int categoryId)
+        public async Task<CategoryWithProductsDto> GetWithProductsByIdAsync(int categoryId)
         {
             var category = await _categoryRepository.GetWithProductsByIdAsync(categoryId);
             var categoryDto = _mapper.Map<CategoryWithProductsDto>(category);
-            return CustomResponseDto<CategoryWithProductsDto>.Success(200,categoryDto);
+            return categoryDto;
         }
     }
 }

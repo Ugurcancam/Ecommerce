@@ -29,11 +29,11 @@ namespace Ecommerce.Api.Controllers
             var productsDto = _mapper.Map<List<ProductDto>>(products.ToList());
             return CreateActionResult(CustomResponseDto<List<ProductDto>>.Success(200, productsDto));
         }
-        [HttpGet("GetProductsWithCategory")]
-        public async Task<IActionResult> GetProductsWithCategory()
-        {
-            return CreateActionResult(await _productService.GetProductsWithCategory());
-        }
+        // [HttpGet("GetProductsWithCategory")]
+        // public async Task<IActionResult> GetProductsWithCategory()
+        // {
+        //     return CreateActionResult(await _productService.GetProductsWithCategory());
+        // }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

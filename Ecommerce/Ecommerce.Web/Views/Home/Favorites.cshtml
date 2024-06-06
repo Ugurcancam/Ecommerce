@@ -2,7 +2,7 @@
 @{
     Layout = "_Layout";
     var favoriteCount = Model.Count();
-    var count = 0;
+    var imageCount = 0;
 }
 
 <!--start breadcrumb-->
@@ -36,12 +36,12 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
                 @foreach (var product in Model)
                 {
-                    count++;
+                    imageCount++;
                     <div class="col">
                         <div class="card rounded-0">
                             <div class="btn-close wishlist-close position-absolute end-0 top-0"></div>
                             <a asp-action="RemoveProductFromFavorite" asp-route-productId="@product.ProductId">
-                                <img src="~/home_assets/images/best-sellar/@($"{count:00}.webp")" alt="" class="card-img-top rounded-0">
+                                <img src="~/home_assets/images/best-sellar/@($"{imageCount:00}.webp")" alt="" class="card-img-top rounded-0">
                             </a>
                             <div class="card-body border-top text-center">
                                 <p class="mb-0 product-short-name">@product.Name</p>

@@ -31,7 +31,7 @@ namespace Ecommerce.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ProductsAsync()
+        public async Task<IActionResult> Products()
         {
             return View(await _productService.GetProductsWithCategory());
         }

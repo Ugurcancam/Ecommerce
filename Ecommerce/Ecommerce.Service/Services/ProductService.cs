@@ -26,6 +26,11 @@ namespace Ecommerce.Service.Services
 
         }
 
+        public async Task<List<Product>> GetActiveProductsWithCategory()
+        {
+            return await _productRepository.GetActiveProductsWithCategory();
+        }
+
         //For API
         public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI()
         {

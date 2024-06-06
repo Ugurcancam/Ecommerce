@@ -18,8 +18,9 @@ public class HomeController : Controller
     private readonly IProductService _productService;
     private readonly IFavoriteService _favoriteService;
     private readonly IBasketService _basketService;
+    private readonly ICategoryService _categoryService;
 
-    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService)
+    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService, ICategoryService categoryService)
     {
 
         _userManager = userManager;
@@ -28,9 +29,59 @@ public class HomeController : Controller
         _productService = productService;
         _favoriteService = favoriteService;
         _basketService = basketService;
+        _categoryService = categoryService;
     }
 
+    public IActionResult Login()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Login(UserViewModel model)
+    {
+        //Login with email and password
+        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        return View();
+    }
+    public IActionResult Register()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Register(UserViewModel model)
+    {
+        var user = new AppUser()
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = model.Name,
+            Surname = model.Surname,
+            Email = model.Email,
+            UserName = model.Email
+        };
+        var result = await _userManager.CreateAsync(user, model.Password);
+        if (result.Succeeded)
+        {
+            return RedirectToAction("Login", "Home");
+        }
 
+        foreach (var error in result.Errors)
+        {
+            Console.WriteLine(error.Description);
+        }
+
+        return View();
+    }
+
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        System.Console.WriteLine("User logged out");
+        return RedirectToAction("Index", "Home");
+    }
     public async Task<IActionResult> Index()
     {
         return View(await _productService.GetAllAsync());
@@ -118,54 +169,9 @@ public class HomeController : Controller
         }
         return View();
     }
-    public IActionResult Login()
-    {
-        return View();
-    }
-    [HttpPost]
-    public async Task<IActionResult> Login(UserViewModel model)
-    {
-        //Login with email and password
-        var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
-        if (result.Succeeded)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-        return View();
-    }
-    public IActionResult Register()
-    {
-        return View();
-    }
-    [HttpPost]
-    public async Task<IActionResult> Register(UserViewModel model)
-    {
-        var user = new AppUser()
-        {
-            Id = Guid.NewGuid().ToString(),
-            Name = model.Name,
-            Surname = model.Surname,
-            Email = model.Email,
-            UserName = model.Email
-        };
-        var result = await _userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
-        {
-            return RedirectToAction("Login", "Home");
-        }
 
-        foreach (var error in result.Errors)
-        {
-            Console.WriteLine(error.Description);
-        }
-
-        return View();
-    }
-
-    public async Task<IActionResult> Logout()
+    public async Task<IActionResult> CategoryWithProducts(int categoryId)
     {
-        await _signInManager.SignOutAsync();
-        System.Console.WriteLine("User logged out");
-        return RedirectToAction("Index", "Home");
+        return View(await _categoryService.GetWithProductsByIdAsync(categoryId));
     }
 }

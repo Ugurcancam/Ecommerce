@@ -20,5 +20,9 @@ namespace Ecommerce.Repository.Repositories
             //Productları ilk çektiğimizde kategorileri de çekersek bu işlemi eager loading ile yapmış oluruz.
             return await _context.Products.Include(x => x.Category).ToListAsync();
         }
+        public async Task<List<Product>> GetActiveProductsWithCategory()
+        {
+            return await _context.Products.Where(x => x.IsActive == true).Include(x=> x.Category).ToListAsync();
+        }
     }
 }

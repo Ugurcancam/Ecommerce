@@ -11,6 +11,9 @@ namespace Ecommerce.Core.Entity
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? InStock { get; set; }
 
         //İlişkisel
         public int CategoryId { get; set; }
@@ -26,7 +29,7 @@ namespace Ecommerce.Core.Entity
         // public decimal? DiscountPrice { get; set; }
         // public bool? IsFavorite { get; set; }
         // public bool? IsBestSelling { get; set; }
-        // public bool? InStock { get; set; }
-        // public bool? IsActive { get; set; }
+
+
     }
 }
