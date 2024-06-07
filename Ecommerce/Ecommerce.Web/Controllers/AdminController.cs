@@ -17,12 +17,14 @@ namespace Ecommerce.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IService<ProductFeature> _productFeatureService;
         private IMapper _mapper;
 
-        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper)
+        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _productFeatureService = productFeatureService;
             _mapper = mapper;
         }
 
@@ -44,8 +46,8 @@ namespace Ecommerce.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct(ProductViewModel model)
         {
-                await _productService.AddAsync(_mapper.Map<Product>(model));
-                return RedirectToAction("Products");
+            await _productService.AddAsync(_mapper.Map<Product>(model));
+            return RedirectToAction("Products");
         }
         public async Task<IActionResult> UpdateProduct(int id)
         {
@@ -59,11 +61,11 @@ namespace Ecommerce.Web.Controllers
             await _productService.UpdateAsync(_mapper.Map<Product>(model));
             return RedirectToAction("Products");
         }
-        
+
         public async Task<IActionResult> RemoveProduct(int id)
         {
             var product = await _productService.GetByIdAsync(id);
-            await _productService.RemoveAsync(product); 
+            await _productService.RemoveAsync(product);
             return RedirectToAction("Products");
         }
 

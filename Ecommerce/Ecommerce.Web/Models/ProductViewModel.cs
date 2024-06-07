@@ -15,6 +15,8 @@ namespace Ecommerce.Web.Models
         public int Stock { get; set; }
         public bool? InStock { get; set; }
         public bool? IsActive { get; set; }
+        public string Color { get; set; } // ProductFeature property
+        
         // public string? ImageUrl { get; set; }
         // public string? ImageUrl2 { get; set; }
         // public string? ImageUrl3 { get; set; }
@@ -25,6 +27,8 @@ namespace Ecommerce.Web.Models
         //İlişkisel
         public int CategoryId { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        public Product Product { get; set; }
+        public List<Product> SimilarProducts { get; set; }
 
     }
 }

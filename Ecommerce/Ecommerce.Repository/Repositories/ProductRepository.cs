@@ -24,5 +24,10 @@ namespace Ecommerce.Repository.Repositories
         {
             return await _context.Products.Where(x => x.IsActive == true).Include(x=> x.Category).ToListAsync();
         }
+
+        public async Task<List<Product>> GetSimilarProducts(int categoryId)
+        {
+            return await _context.Products.Where(x => x.CategoryId == categoryId).OrderBy(x => Guid.NewGuid()).Take(5).ToListAsync();
+        }
     }
 }

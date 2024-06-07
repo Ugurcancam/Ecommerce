@@ -2,6 +2,7 @@
 @model List<Product>
 @{
     Layout = "_Layout";
+    var imageCount = 0;
 }
 
 <!--start carousel-->
@@ -122,19 +123,20 @@
         <div class="product-thumbs">
             @foreach (var product in Model)
             {
+                imageCount++;
                 <div class="card">
                     <div class="position-relative overflow-hidden">
                         <div
                             class="product-options d-flex align-items-center justify-content-center gap-2 mx-auto position-absolute bottom-0 start-0 end-0">
-                            <a asp-action="AddProductToFavorite" asp-route-productId="@product.Id"><i
+                            <a asp-action="AddProductToFavorite" asp-route-productId="@product.Id" asp-route-returnUrl="Index"><i
                                     class="bi bi-heart"></i></a>
-                            <a asp-action="AddProductToBasket" asp-route-productId="@product.Id"><i
+                            <a asp-action="AddProductToBasket" asp-route-productId="@product.Id" asp-route-returnUrl="Index"><i
                                     class="bi bi-basket3"></i></a>
                             <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#QuickViewModal"><i
                                     class="bi bi-zoom-in"></i></a>
                         </div>
-                        <a href="product-details.html">
-                            <img src="~/home_assets/images/featured-products/04.webp" class="card-img-top" alt="...">
+                        <a asp-action="ProductDetail" asp-route-id="@product.Id">
+                            <img src="~/home_assets/images/featured-products/@($"{imageCount:00}.webp")"class="card-img-top" alt="...">
                         </a>
                     </div>
                     <div class="card-body">
@@ -147,7 +149,7 @@
                                 <i class="bi bi-star-fill text-warning"></i>
                                 <i class="bi bi-star-fill text-warning"></i>
                             </div>
-                            <p class="mb-0 h6 fw-bold product-price">@product.Price ₺</p>
+                            <p class="mb-0 h6 fw-bold product-price">@product.Price₺</p>
                         </div>
                     </div>
                 </div>

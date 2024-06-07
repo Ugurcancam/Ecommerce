@@ -15,5 +15,6 @@ namespace Ecommerce.Core.Services
         //For MVC
         Task<List<ProductWithCategoryDto>> GetProductsWithCategory();
         Task<List<Product>> GetActiveProductsWithCategory();
+        Task<List<Product>> GetSimilarProducts(int categoryId);
     }
 }

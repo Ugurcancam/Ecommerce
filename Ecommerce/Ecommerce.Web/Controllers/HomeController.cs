@@ -75,16 +75,27 @@ public class HomeController : Controller
 
         return View();
     }
-
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
         System.Console.WriteLine("User logged out");
         return RedirectToAction("Index", "Home");
     }
+
     public async Task<IActionResult> Index()
     {
         return View(await _productService.GetAllAsync());
+    }
+    public async Task<IActionResult> ProductDetail(int id)
+    {
+        var product = await _productService.GetByIdAsync(id);
+        var similarProducts = await _productService.GetSimilarProducts(product.CategoryId);
+        var model = new ProductViewModel
+        {
+            Product = product,
+            SimilarProducts = similarProducts
+        };
+        return View(model);
     }
     public async Task<IActionResult> Favorites()
     {
@@ -105,7 +116,7 @@ public class HomeController : Controller
 
         return View(model);
     }
-    public async Task<IActionResult> AddProductToFavorite(int productId)
+    public async Task<IActionResult> AddProductToFavorite(int productId, string returnUrl)
     {
         //Get the logged in users id
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -113,14 +124,14 @@ public class HomeController : Controller
         {
             return RedirectToAction("Login");
         }
-        await _favoriteService.AddFavorite(userId, productId); // Pass the converted userId as an argument
-        return RedirectToAction("Index");
+        await _favoriteService.AddFavorite(userId, productId);
+        return RedirectToAction(returnUrl);
     }
-    public async Task<IActionResult> RemoveProductFromFavorite(int productId)
+    public async Task<IActionResult> RemoveProductFromFavorite(int productId, string returnUrl)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         await _favoriteService.RemoveFavorite(userId, productId);
-        return RedirectToAction("Index");
+        return RedirectToAction(returnUrl);
     }
 
     public async Task<IActionResult> Basket()
@@ -142,23 +153,49 @@ public class HomeController : Controller
         return View(model);
     }
     //Daha sonra quantity parametresi eklenecek
-    public async Task<IActionResult> AddProductToBasket(int productId)
+    public async Task<IActionResult> AddProductToBasket(int productId, string returnUrl, bool returnProductId)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (userId == null)
         {
             return RedirectToAction("Login");
         }
+
         await _basketService.AddToBasketAsync(userId, productId, 1);
-        return RedirectToAction("Index");
+
+        // returnProductId değeri true ise returnUrl'e productId ile geri dönüyoruz.(ProductDetail sayfası gibi id'ye ihtiyaç duyulan sayfalarda)
+        if (returnProductId)
+        {
+            return RedirectToAction(returnUrl, new { id = productId });
+        }
+        else
+        {
+            return RedirectToAction(returnUrl);
+        }
     }
 
-    public async Task<IActionResult> RemoveProductFromBasket(int productId)
+
+    public async Task<IActionResult> ReduceQuantity(int productId, string returnUrl)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        await _basketService.RemoveFromBasketAsync(userId, productId);
-        return RedirectToAction("Index");
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        await _basketService.ReduceQuantityAsync(userId, productId);
+        return RedirectToAction(returnUrl);
     }
+    public async Task<IActionResult> RemoveProductFromBasket(int productId, string returnUrl)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        await _basketService.RemoveFromBasketAsync(userId, productId);
+        return RedirectToAction(returnUrl);
+    }
+
 
     public IActionResult Dashboard()
     {
@@ -170,8 +207,28 @@ public class HomeController : Controller
         return View();
     }
 
-    public async Task<IActionResult> CategoryWithProducts(int categoryId)
+    public async Task<IActionResult> CategoryWithProducts(int id)
     {
-        return View(await _categoryService.GetWithProductsByIdAsync(categoryId));
+        return View(await _categoryService.GetWithProductsByIdAsync(id));
+    }
+
+    public async Task<IActionResult> Cart()
+    {
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+        {
+            //Sayfada kullanıcı girişi yapmamışsa boş sepet döndür, sepet count'larını gösterdiğimizden dolayı çökmemesi için boş bir model döndürmemiz lazım.
+            return View(new List<BasketItemViewModel>());
+        }
+        var basket = await _basketService.GetBasketByUserIdAsync(userId);
+        var model = basket.BasketItems.Select(p => new BasketItemViewModel
+        {
+            ProductId = p.ProductId,
+            Name = p.Product.Name,
+            Price = p.Product.Price,
+            Quantity = p.Quantity
+        }).ToList();
+
+        return View(model);
     }
 }

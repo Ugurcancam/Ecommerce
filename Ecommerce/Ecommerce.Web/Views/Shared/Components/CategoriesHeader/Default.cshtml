@@ -11,7 +11,7 @@
                 <ul class="list-unstyled">
                     @foreach (var category in Model)
                     {
-                        <li><a asp-action="CategoryWithProducts" asp-route-categoryId="@category.Id">@category.Name</a>
+                        <li><a asp-action="CategoryWithProducts" asp-route-id="@category.Id">@category.Name</a>
                         </li>
                     }
                 </ul>

@@ -18,7 +18,7 @@
                 imageCount++;
                 <div class="d-flex align-items-center gap-3">
                     <div class="bottom-product-img">
-                        <a href="product-details.html">
+                        <a asp-action="ProductDetail" asp-route-id="@product.ProductId">
                             <img src="~/home_assets/images/new-arrival/@($"{imageCount:00}.webp")" width="60" alt="">
                         </a>
                     </div>
@@ -37,7 +37,7 @@
     </div>
     <div class="offcanvas-footer p-3 border-top">
         <div class="d-grid">
-            <button type="button" class="btn btn-lg btn-dark btn-ecomm px-5 py-3">Checkout</button>
+            <a asp-action="Cart" class="btn btn-lg btn-dark btn-ecomm px-5 py-3">Checkout</a>
         </div>
     </div>
 

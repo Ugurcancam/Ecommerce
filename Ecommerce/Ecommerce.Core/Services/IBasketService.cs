@@ -11,5 +11,6 @@ namespace Ecommerce.Core.Services
         Task<Basket> GetBasketByUserIdAsync(string userId);
         Task AddToBasketAsync(string userId, int productId, int quantity);
         Task RemoveFromBasketAsync(string userId, int productId);
+        Task ReduceQuantityAsync(string userId, int productId);
     }
 }

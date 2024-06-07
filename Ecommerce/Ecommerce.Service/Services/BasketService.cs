@@ -63,14 +63,44 @@ namespace Ecommerce.Service.Services
 
         public async Task RemoveFromBasketAsync(string userId, int productId)
         {
+            // Kullanıcının sepetini alır. Eğer kullanıcıya ait bir sepet yoksa 'null' döner.
             var basket = await _basketRepository.GetBasketByUserIdAsync(userId);
             if (basket != null)
             {
+                // Sepetten çıkartılmak istenilen ürünün (productId) olup olmadığını kontrol eder.
                 var basketItem = basket.BasketItems.FirstOrDefault(ci => ci.ProductId == productId);
                 if (basketItem != null)
                 {
+                    // Eğer ürün sepette varsa, ürünü sepetten çıkartır.
                     _basketItemRepository.Remove(basketItem);
                     await _unitOfWork.CommitAsync();
+                }
+            }
+        }
+
+        public async Task ReduceQuantityAsync(string userId, int productId)
+        {
+            // Kullanıcının sepetini alır. Eğer kullanıcıya ait bir sepet yoksa 'null' döner.
+            var basket = await _basketRepository.GetBasketByUserIdAsync(userId);
+            if (basket != null)
+            {
+                // Sepetten çıkartılmak istenilen ürünün (productId) olup olmadığını kontrol eder.
+                var basketItem = basket.BasketItems.FirstOrDefault(ci => ci.ProductId == productId);
+                if (basketItem != null)
+                {
+                    // Eğer ürün sepette varsa, ürünün miktarını azaltır.
+                    if (basketItem.Quantity > 1)
+                    {
+                        basketItem.Quantity -= 1;
+                        _basketItemRepository.Update(basketItem);
+                        await _unitOfWork.CommitAsync();
+                    }
+                    // Eğer ürün sepette 1 adet varsa, ürünü sepetten çıkartır.
+                    else
+                    {
+                        _basketItemRepository.Remove(basketItem);
+                        await _unitOfWork.CommitAsync();
+                    }
                 }
             }
         }

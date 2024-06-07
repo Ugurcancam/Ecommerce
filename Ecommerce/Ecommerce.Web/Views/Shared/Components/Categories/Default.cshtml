@@ -1,4 +1,7 @@
 @model List<Category>
+@{
+    var imageCount = 0;
+}
 <section class="cartegory-slider section-padding bg-section-2">
     <div class="container">
         <div class="text-center pb-3">
@@ -8,14 +11,16 @@
         <div class="cartegory-box">
             @foreach (var category in Model)
             {
-                <a href="shop-grid-type-4.html">
+                imageCount++;
+                <a asp-action="CategoryWithProducts" asp-route-id="@category.Id">
                     <div class="card">
                         <div class="card-body">
                             <div class="overflow-hidden">
-                                <img src="~/home_assets/images/categories/01.webp" class="card-img-top rounded-0" alt="...">
+                                <img src="~/home_assets/images/categories/@($"{imageCount:00}.webp")"
+                                    class="card-img-top rounded-0" alt="...">
                             </div>
                             <div class="text-center">
-                                <h5 class="mb-1 cartegory-name mt-3 fw-bold">@category.Name</h5>          
+                                <h5 class="mb-1 cartegory-name mt-3 fw-bold">@category.Name</h5>
                                 @* <h6 class="mb-0 product-number fw-bold">@category.Products.Count</h6> *@
                             </div>
                         </div>

@@ -10,5 +10,6 @@ namespace Ecommerce.Core.Repositories
     {
         Task<List<Product>> GetProductsWithCategory();
         Task<List<Product>> GetActiveProductsWithCategory();
+        Task<List<Product>> GetSimilarProducts(int categoryId);
     }
 }
