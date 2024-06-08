@@ -18,12 +18,14 @@ namespace Ecommerce.Web.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IService<ProductFeature> _productFeatureService;
+        private readonly IAltCategoryService _altCategoryService;
         private IMapper _mapper;
 
-        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService)
+        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService, IAltCategoryService altCategoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _altCategoryService = altCategoryService;
             _productFeatureService = productFeatureService;
             _mapper = mapper;
         }
@@ -41,6 +43,7 @@ namespace Ecommerce.Web.Controllers
         {
             var model = new ProductViewModel();
             model.Categories = await _categoryService.GetAllAsync();
+            model.AltCategories = await _altCategoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
@@ -53,6 +56,7 @@ namespace Ecommerce.Web.Controllers
         {
             var model = _mapper.Map<ProductViewModel>(await _productService.GetByIdAsync(id));
             model.Categories = await _categoryService.GetAllAsync();
+            model.AltCategories = await _altCategoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
@@ -93,11 +97,47 @@ namespace Ecommerce.Web.Controllers
             await _categoryService.UpdateAsync(_mapper.Map<Category>(model));
             return RedirectToAction("Categories");
         }
+
         public async Task<IActionResult> RemoveCategory(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
             await _categoryService.RemoveAsync(category);
             return RedirectToAction("Categories");
+        }
+
+        public async Task<IActionResult> AltCategories()
+        {
+            return View(await _altCategoryService.GetAllWithCategoryAsync());
+        }
+        public async Task<IActionResult> AddAltCategoryAsync()
+        {
+            var model = new AltCategoryViewModel();
+            model.Categories = await _categoryService.GetAllAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddAltCategory(AltCategoryViewModel model)
+        {
+            await _altCategoryService.AddAsync(_mapper.Map<AltCategory>(model));
+            return RedirectToAction("AltCategories");
+        }
+        public async Task<IActionResult> UpdateAltCategory(int id)
+        {
+            var model = _mapper.Map<AltCategoryViewModel>(await _altCategoryService.GetByIdAsync(id));
+            model.Categories = await _categoryService.GetAllAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAltCategory(AltCategoryViewModel model)
+        {
+            await _altCategoryService.UpdateAsync(_mapper.Map<AltCategory>(model));
+            return RedirectToAction("AltCategories");
+        }
+        public async Task<IActionResult> RemoveAltCategory(int id)
+        {
+            var altCategory = await _altCategoryService.GetByIdAsync(id);
+            await _altCategoryService.RemoveAsync(altCategory);
+            return RedirectToAction("AltCategories");
         }
     }
 }

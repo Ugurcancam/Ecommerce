@@ -28,7 +28,7 @@
                         </p>
                     </div>
                     <div class="ms-auto fs-5">
-                        <a asp-action="RemoveProductFromBasket" asp-route-productId="@product.ProductId" class="link-dark"><i class="bi bi-trash"></i></a>
+                        <a asp-action="RemoveProductFromBasket" asp-route-productId="@product.ProductId" asp-route-returnUrl="Cart" class="link-dark"><i class="bi bi-trash"></i></a>
                     </div>
                 </div>
                 <hr>

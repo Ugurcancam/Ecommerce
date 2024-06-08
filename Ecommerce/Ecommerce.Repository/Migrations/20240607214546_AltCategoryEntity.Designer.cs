@@ -4,6 +4,7 @@ using Ecommerce.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240607214546_AltCategoryEntity")]
+    partial class AltCategoryEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,9 +247,6 @@ namespace Ecommerce.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AltCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -274,8 +274,6 @@ namespace Ecommerce.Repository.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AltCategoryId");
 
                     b.HasIndex("CategoryId");
 
@@ -473,17 +471,11 @@ namespace Ecommerce.Repository.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.Entity.Product", b =>
                 {
-                    b.HasOne("Ecommerce.Core.Entity.AltCategory", "AltCategory")
-                        .WithMany("Products")
-                        .HasForeignKey("AltCategoryId");
-
                     b.HasOne("Ecommerce.Core.Entity.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("AltCategory");
 
                     b.Navigation("Category");
                 });
@@ -548,11 +540,6 @@ namespace Ecommerce.Repository.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Ecommerce.Core.Entity.AltCategory", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entity.AppUser", b =>

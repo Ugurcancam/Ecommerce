@@ -17,7 +17,9 @@ namespace Ecommerce.Core.Entity
 
         //İlişkisel
         public int CategoryId { get; set; }
+        public int? AltCategoryId { get; set; }
         public Category Category { get; set; }
+        public AltCategory? AltCategory { get; set; }
         public ProductFeature ProductFeature { get; set; }
         public ICollection<Favorite> Favorites { get; set; } // Favori ile ilişki
         public ICollection<BasketItem> BasketItems { get; set; } // Sepetle ilişki

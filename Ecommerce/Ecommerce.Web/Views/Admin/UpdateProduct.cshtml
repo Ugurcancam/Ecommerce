@@ -63,6 +63,20 @@
                                 }
                             </select>
                         </div>
+                        <div class="gap22 cols">
+                            <fieldset class="category">
+                                <div class="body-title mb-10">Alt Kategori <span class="tf-color-1">*</span></div>
+                                <div class="select">
+                                    <select class="" asp-for="AltCategoryId"> 
+                                        <option>Alt Kategori Seçiniz</option>
+                                        @foreach (var item in Model.AltCategories)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </fieldset>
+                        </div>
                     </fieldset>
 
 

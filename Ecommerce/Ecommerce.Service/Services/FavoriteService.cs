@@ -28,11 +28,22 @@ namespace Ecommerce.Service.Services
 
         public async Task AddFavorite(string userId, int productId)
         {
+            var usersFavorites = await _favoriteRepository.GetFavoritesByUserIdAsync(userId);
             var favorite = new Favorite
             {
                 UserId = userId,
                 ProductId = productId
             };
+            if(usersFavorites != null)
+            {
+                // Kullanıcının favorileri arasında eklemek istenen ürün var mı diye kontrol ediyoruz.
+                var isExist = usersFavorites.FirstOrDefault(f => f.ProductId == productId);
+                // Eğer ürün favoriler arasında varsa, aksiyon almıyoruz.
+                if(isExist != null)
+                {
+                    return;
+                }
+            }
             await _favoriteRepository.AddAsync(favorite);
             await _unitOfWork.CommitAsync();
         }

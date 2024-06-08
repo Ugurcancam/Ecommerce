@@ -27,6 +27,8 @@ namespace Ecommerce.Web.Models
         //İlişkisel
         public int CategoryId { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        public int AltCategoryId { get; set; }
+        public IEnumerable<AltCategory> AltCategories { get; set; }
         public Product Product { get; set; }
         public List<Product> SimilarProducts { get; set; }
 
