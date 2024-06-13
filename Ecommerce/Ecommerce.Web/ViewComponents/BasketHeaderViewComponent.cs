@@ -27,13 +27,17 @@ namespace Ecommerce.Web.ViewComponents
                 return View(new List<BasketItemViewModel>());
             }
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
-            var model = basket.BasketItems.Select(p => new BasketItemViewModel
+            if (basket == null || basket.BasketItems == null)
+            {
+                return View(new List<BasketItemViewModel>());
+            }
+            var model = basket?.BasketItems?.Select(p => new BasketItemViewModel
             {
                 ProductId = p.ProductId,
                 Name = p.Product.Name,
                 Price = p.Product.Price,
                 Quantity = p.Quantity
-            }).ToList();
+            }).ToList() ?? new List<BasketItemViewModel>();
 
             return View(model);
         }

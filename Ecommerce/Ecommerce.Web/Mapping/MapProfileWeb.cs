@@ -17,6 +17,7 @@ namespace Ecommerce.Web.Mapping
             CreateMap<Category, CategoryViewModel>().ReverseMap();
             CreateMap<AltCategory, AltCategoryViewModel>().ReverseMap();
             CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
+            CreateMap<Order,UserOrdersViewModel>().ReverseMap();
         }
     }
 }

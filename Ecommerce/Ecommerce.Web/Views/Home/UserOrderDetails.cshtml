@@ -1,0 +1,42 @@
+@model Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h1>Order Details</h1>
+
+<div>
+    <h3>Order Information</h3>
+    <p>Order ID: @Model.Id</p>
+    <p>Order Date: @Model.OrderDate</p>
+    <!-- Add more order information here -->
+</div>
+
+<div>
+    <h3>Order Items</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.Price</td>
+                    @* <td>@(item.Quantity * item.Price)</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Add more sections or elements as needed -->
+

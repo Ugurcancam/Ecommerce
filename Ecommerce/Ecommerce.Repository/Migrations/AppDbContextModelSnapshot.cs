@@ -236,6 +236,60 @@ namespace Ecommerce.Repository.Migrations
                     b.ToTable("Favorites");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entity.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entity.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entity.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -471,6 +525,36 @@ namespace Ecommerce.Repository.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entity.Order", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entity.AppUser", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entity.OrderItem", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entity.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ecommerce.Core.Entity.Product", "Product")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entity.Product", b =>
                 {
                     b.HasOne("Ecommerce.Core.Entity.AltCategory", "AltCategory")
@@ -560,6 +644,8 @@ namespace Ecommerce.Repository.Migrations
                     b.Navigation("Baskets");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entity.Basket", b =>
@@ -574,11 +660,18 @@ namespace Ecommerce.Repository.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entity.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entity.Product", b =>
                 {
                     b.Navigation("BasketItems");
 
                     b.Navigation("Favorites");
+
+                    b.Navigation("OrderItems");
 
                     b.Navigation("ProductFeature")
                         .IsRequired();

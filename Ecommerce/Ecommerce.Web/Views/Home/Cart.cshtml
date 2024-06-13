@@ -21,7 +21,6 @@
 </div>
 <!--end breadcrumb-->
 
-
 <!--start product details-->
 <section class="section-padding">
     <div class="container">
@@ -107,7 +106,9 @@
                             <p class="mb-0">@total</p>
                         </div>
                         <div class="d-grid mt-4">
-                            <button type="button" class="btn btn-dark btn-ecomm py-3 px-5">Sipariş Oluştur</button>
+                            <form asp-action="CreateOrder" method="post">
+                                <button type="submit" class="btn btn-dark btn-ecomm py-3 px-5">Create Order</button>
+                            </form>
                         </div>
                     </div>
                 </div>

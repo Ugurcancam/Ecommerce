@@ -19,8 +19,9 @@ public class HomeController : Controller
     private readonly IFavoriteService _favoriteService;
     private readonly IBasketService _basketService;
     private readonly ICategoryService _categoryService;
+    private readonly IOrderService _orderService;
 
-    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService, ICategoryService categoryService)
+    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService, ICategoryService categoryService, IOrderService orderService)
     {
 
         _userManager = userManager;
@@ -30,6 +31,7 @@ public class HomeController : Controller
         _favoriteService = favoriteService;
         _basketService = basketService;
         _categoryService = categoryService;
+        _orderService = orderService;
     }
 
     public IActionResult Login()
@@ -230,5 +232,52 @@ public class HomeController : Controller
         }).ToList();
 
         return View(model);
+    }
+    public async Task<IActionResult> CreateOrder()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        try
+        {
+            var order = await _orderService.CreateOrderAsync(userId);
+            return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+            return RedirectToAction("Index", "Home");
+        }
+    }
+
+    public async Task<IActionResult> OrderConfirmation(int orderId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var orders = await _orderService.GetUserOrdersAsync(userId);
+        var order = orders.FirstOrDefault(o => o.Id == orderId);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        return View(order);
+    }
+
+    public async Task<IActionResult> UserOrders()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var orders = await _orderService.GetUserOrdersAsync(userId);
+        return View(orders);
+    }
+    public async Task<IActionResult> UserOrderDetails(int orderId)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var order = await _orderService.GetOrderDetailsAsync(userId, orderId);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        return View(order);
     }
 }

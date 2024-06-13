@@ -22,6 +22,8 @@ namespace Ecommerce.Repository
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,7 +44,7 @@ namespace Ecommerce.Repository
                 .HasOne(b => b.User)
                 .WithMany(u => u.Baskets)
                 .HasForeignKey(b => b.UserId);
-                
+
             // Product - BasketItem ilişkisi
             modelBuilder.Entity<BasketItem>()
                 .HasOne(bi => bi.Product)
@@ -54,6 +56,21 @@ namespace Ecommerce.Repository
                 .HasOne(bi => bi.Basket)
                 .WithMany(b => b.BasketItems)
                 .HasForeignKey(bi => bi.BasketId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.User)
+                .WithMany(u => u.Orders)
+                .HasForeignKey(o => o.UserId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)
+                .WithMany(o => o.OrderItems)
+                .HasForeignKey(oi => oi.OrderId);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Product)
+                .WithMany(p => p.OrderItems)
+                .HasForeignKey(oi => oi.ProductId);
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -74,22 +91,24 @@ namespace Ecommerce.Repository
                     }
                 }
                 // Product entity'si eklenirken IsActive true olacak
-                if(entry.Entity is Product productEntity)
+                if (entry.Entity is Product productEntity)
                 {
                     if (entry.State == EntityState.Added)
                     {
                         productEntity.IsActive = true;
                         productEntity.InStock = true;
-                        if(productEntity.Stock == 0)
+                        if (productEntity.Stock == 0)
                         {
                             productEntity.InStock = false;
                         }
-                    }else if (entry.State == EntityState.Modified)
+                    }
+                    else if (entry.State == EntityState.Modified)
                     {
-                        if(productEntity.Stock == 0)
+                        if (productEntity.Stock == 0)
                         {
                             productEntity.InStock = false;
-                        }else if (productEntity.Stock > 0)
+                        }
+                        else if (productEntity.Stock > 0)
                         {
                             productEntity.InStock = true;
                         }

@@ -28,6 +28,10 @@ builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(MapProfileWeb).Assembly);

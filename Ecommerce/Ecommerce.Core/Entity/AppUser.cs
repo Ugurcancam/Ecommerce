@@ -14,5 +14,6 @@ namespace Ecommerce.Core.Entity
         // İlişkisel
         public ICollection<Favorite> Favorites { get; set; }
         public ICollection<Basket> Baskets { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

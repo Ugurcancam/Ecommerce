@@ -23,6 +23,7 @@ namespace Ecommerce.Core.Entity
         public ProductFeature ProductFeature { get; set; }
         public ICollection<Favorite> Favorites { get; set; } // Favori ile ilişki
         public ICollection<BasketItem> BasketItems { get; set; } // Sepetle ilişki
+        public ICollection<OrderItem> OrderItems { get; set; } // Sipariş ile ilişki
 
         // İleride eklenecek özellikler
         // public string? ImageUrl { get; set; }
