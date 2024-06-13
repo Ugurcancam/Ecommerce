@@ -1,12 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Ecommerce.Core.Entity;
 using Ecommerce.Core.Repositories;
 using Ecommerce.Core.Services;
 using Ecommerce.Core.UnitOfWorks;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Ecommerce.Service.Services
 {
@@ -28,40 +27,62 @@ namespace Ecommerce.Service.Services
 
         public async Task AddFavorite(string userId, int productId)
         {
-            var usersFavorites = await _favoriteRepository.GetFavoritesByUserIdAsync(userId);
-            var favorite = new Favorite
+            await using var transaction = await _unitOfWork.BeginTransactionAsync();
+
+            try
             {
-                UserId = userId,
-                ProductId = productId
-            };
-            if(usersFavorites != null)
-            {
-                // Kullanıcının favorileri arasında eklemek istenen ürün var mı diye kontrol ediyoruz.
-                var isExist = usersFavorites.FirstOrDefault(f => f.ProductId == productId);
-                // Eğer ürün favoriler arasında varsa, aksiyon almıyoruz.
-                if(isExist != null)
+                var usersFavorites = await _favoriteRepository.GetFavoritesByUserIdAsync(userId);
+                var favorite = new Favorite
                 {
-                    return;
+                    UserId = userId,
+                    ProductId = productId
+                };
+
+                if (usersFavorites != null)
+                {
+                    // Check if the product is already in the user's favorites.
+                    var isExist = usersFavorites.FirstOrDefault(f => f.ProductId == productId);
+                    if (isExist != null)
+                    {
+                        return;
+                    }
                 }
+
+                await _favoriteRepository.AddAsync(favorite);
+                await _unitOfWork.CommitAsync();
+
+                await transaction.CommitAsync();
             }
-            await _favoriteRepository.AddAsync(favorite);
-            await _unitOfWork.CommitAsync();
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task RemoveFavorite(string userId, int productId)
         {
-            // Kullanıcının favorilerini alıyoruz.
-            var usersFavorites = await _favoriteRepository.GetFavoritesByUserIdAsync(userId);
-            if (usersFavorites != null)
+            await using var transaction = await _unitOfWork.BeginTransactionAsync();
+
+            try
             {
-                // Kullanıcının favorileri arasında silinmek istenen ürün var mı diye kontrol ediyoruz.
-                var favorite = usersFavorites.FirstOrDefault(f => f.ProductId == productId);
-                if (favorite != null)
+                var usersFavorites = await _favoriteRepository.GetFavoritesByUserIdAsync(userId);
+                if (usersFavorites != null)
                 {
-                    // Eğer ürün favoriler arasında varsa, favorilerden kaldırıyoruz.
-                    _favoriteRepository.Remove(favorite);
-                    await _unitOfWork.CommitAsync();
+                    var favorite = usersFavorites.FirstOrDefault(f => f.ProductId == productId);
+                    if (favorite != null)
+                    {
+                        _favoriteRepository.Remove(favorite);
+                        await _unitOfWork.CommitAsync();
+                    }
                 }
+
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
             }
         }
     }

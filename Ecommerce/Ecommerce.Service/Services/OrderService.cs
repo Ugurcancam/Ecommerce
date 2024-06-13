@@ -14,13 +14,12 @@ namespace Ecommerce.Service.Services
 {
     public class OrderService : Service<Order>, IOrderService
     {
-        private readonly AppDbContext _context;
         private readonly IOrderRepository _orderRepository;
         private readonly IBasketService _basketService;
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IGenericRepository<Order> genericRepository, IUnitOfWork unitOfWork,IOrderRepository orderRepository,IBasketService basketService, IUserService userService) : base(genericRepository, unitOfWork)
+        public OrderService(IGenericRepository<Order> genericRepository, IUnitOfWork unitOfWork, IOrderRepository orderRepository, IBasketService basketService, IUserService userService) : base(genericRepository, unitOfWork)
         {
             _orderRepository = orderRepository;
             _basketService = basketService;
@@ -28,7 +27,7 @@ namespace Ecommerce.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Order> CreateOrderAsync(string userId,string city,string district,string postalCode,string? orderNote,string deliveryAddress,string? billingAddress)
+        public async Task<Order> CreateOrderAsync(string userId, string city, string district, string postalCode, string? orderNote, string deliveryAddress, string? billingAddress)
         {
             var user = await _userService.GetUserByIdAsync(userId);
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
@@ -48,8 +47,8 @@ namespace Ecommerce.Service.Services
                 PostalCode = postalCode,
                 OrderNote = orderNote,
                 DeliveryAddress = deliveryAddress,
-                BillingAddress = billingAddress,  
-                OrderNumber = "#" + new Random().Next(111111, 999999).ToString(), 
+                BillingAddress = billingAddress,
+                OrderNumber = "#" + new Random().Next(111111, 999999).ToString(),
                 TotalAmount = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price),
                 OrderItems = basket.BasketItems.Select(bi => new OrderItem
                 {
@@ -60,12 +59,26 @@ namespace Ecommerce.Service.Services
                 }).ToList()
             };
 
-            await _orderRepository.AddAsync(order);
-            await _unitOfWork.CommitAsync();
+            // Create a transaction for the order creation process
+            await using var transaction = await _unitOfWork.BeginTransactionAsync();
 
-            // Clear the basket after creating the order
-            basket.BasketItems.Clear();
-            await _unitOfWork.CommitAsync();
+            try
+            {
+
+                await _orderRepository.AddAsync(order);
+                await _unitOfWork.CommitAsync();
+
+                // Clear the basket after creating the order
+                basket.BasketItems.Clear();
+                await _unitOfWork.CommitAsync();
+
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
 
             return order;
         }

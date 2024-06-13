@@ -261,8 +261,8 @@ public class HomeController : Controller
                 DeliveryAddress = orderViewModel.DeliveryAddress,
                 BillingAddress = orderViewModel.BillingAddress
             };
-            await _orderService.CreateOrderAsync(userId, order.City, order.District, order.PostalCode, order.OrderNote, order.DeliveryAddress, order.BillingAddress);
-            return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
+           var newOrder = await _orderService.CreateOrderAsync(userId, order.City, order.District, order.PostalCode, order.OrderNote, order.DeliveryAddress, order.BillingAddress);
+            return RedirectToAction("OrderConfirmation", new { orderId = newOrder.Id });
         }
         catch (InvalidOperationException ex)
         {
