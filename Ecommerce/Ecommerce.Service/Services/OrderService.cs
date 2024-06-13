@@ -12,7 +12,7 @@ using static Ecommerce.Core.Entity.Order;
 
 namespace Ecommerce.Service.Services
 {
-    public class OrderService : IOrderService
+    public class OrderService : Service<Order>, IOrderService
     {
         private readonly AppDbContext _context;
         private readonly IOrderRepository _orderRepository;
@@ -20,16 +20,15 @@ namespace Ecommerce.Service.Services
         private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(AppDbContext context, IUnitOfWork unitOfWork, IOrderRepository orderRepository, IBasketService basketService, IUserService userService)
+        public OrderService(IGenericRepository<Order> genericRepository, IUnitOfWork unitOfWork,IOrderRepository orderRepository,IBasketService basketService, IUserService userService) : base(genericRepository, unitOfWork)
         {
-            _context = context;
-            _unitOfWork = unitOfWork;
             _orderRepository = orderRepository;
             _basketService = basketService;
             _userService = userService;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<Order> CreateOrderAsync(string userId)
+        public async Task<Order> CreateOrderAsync(string userId,string city,string district,string postalCode,string? orderNote,string deliveryAddress,string? billingAddress)
         {
             var user = await _userService.GetUserByIdAsync(userId);
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
@@ -44,6 +43,13 @@ namespace Ecommerce.Service.Services
                 UserId = userId,
                 User = user,
                 OrderDate = DateTime.Now,
+                City = city,
+                District = district,
+                PostalCode = postalCode,
+                OrderNote = orderNote,
+                DeliveryAddress = deliveryAddress,
+                BillingAddress = billingAddress,  
+                OrderNumber = "#" + new Random().Next(111111, 999999).ToString(), 
                 TotalAmount = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price),
                 OrderItems = basket.BasketItems.Select(bi => new OrderItem
                 {
@@ -69,14 +75,18 @@ namespace Ecommerce.Service.Services
             return await _orderRepository.GetOrdersByUserIdAsync(userId);
         }
 
-        public async Task<Order> GetOrderDetailsAsync(string userId, int orderId)
+        public async Task<Order> GetOrderDetailsByUserAsync(string userId, int orderId)
         {
-            return await _context.Orders
-                                 .Where(order => order.UserId == userId && order.Id == orderId)
-                                 .Include(order => order.OrderItems)
-                                 .ThenInclude(item => item.Product)
-                                 .FirstOrDefaultAsync();
+            return await _orderRepository.GetOrderDetailsByUserAsync(userId, orderId);
+        }
+        public async Task<Order> GetOrderDetailsAsync(int orderId)
+        {
+            return await _orderRepository.GetOrderDetailsAsync(orderId);
         }
 
+        public async Task<IEnumerable<Order>> GetAllWithUsers()
+        {
+            return await _orderRepository.GetAllWithUsers();
+        }
     }
 }

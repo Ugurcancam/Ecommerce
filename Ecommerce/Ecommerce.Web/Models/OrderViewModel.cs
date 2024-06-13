@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecommerce.Core.Entity;
 
-namespace Ecommerce.Core.Entity
+namespace Ecommerce.Web.Models
 {
-    public class Order : BaseEntity
+    public class OrderViewModel
     {
+        public int Id { get; set; }
         public string City { get; set; }
         public string District { get; set; }
         public string PostalCode { get; set; }

@@ -1,0 +1,92 @@
+@model OrderViewModel
+@{
+    Layout = "_Layout";
+}
+
+<!--start page content-->
+<div class="page-content">
+
+    <!--start breadcrumb-->
+    <div class="py-4 border-bottom">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:;">checkout</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Billing Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!--end breadcrumb-->
+
+    <!--start product details-->
+    <section class="section-padding">
+        <div class="container">
+            <div class="d-flex align-items-center px-3 py-2 border mb-4">
+                <div class="text-start">
+                    <h4 class="mb-0 h4 fw-bold">Billing Details</h4>
+                </div>
+            </div>
+            <form method="post" asp-action="CreateOrder"> 
+                <div class="row g-4">
+                    <div class="col-12 col-lg-8 col-xl-8">
+                        <h6 class="fw-bold mb-3 py-2 px-3 bg-light">Shipping Details</h6>
+                        <div class="card rounded-0">
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-12 col-lg-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control rounded-0"
+                                                placeholder="Street Address" asp-for="DeliveryAddress">
+                                            <label>Teslimat Adresi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control rounded-0" placeholder="Zip Code" asp-for="PostalCode">
+                                            <label>Posta Kodu</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control rounded-0" placeholder="City" asp-for="City">
+                                            <label >City</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control rounded-0" placeholder="Country" asp-for="District">
+                                            <label >District</label>
+                                        </div>
+                                    </div>
+                                </div><!--end row-->
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-12 col-lg-4 col-xl-4">
+                        <div class="card rounded-0 mb-3">
+                            <div class="card-body">
+
+
+                                <div class="d-grid mt-4">
+                                    <button type="submit" class="btn btn-dark btn-ecomm py-3 px-5">Continue</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!--end row-->
+            </form>
+
+        </div>
+    </section>
+    <!--start product details-->
+
+
+
+
+</div>
+<!--end page content-->

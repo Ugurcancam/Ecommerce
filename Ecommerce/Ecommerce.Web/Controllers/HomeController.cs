@@ -216,7 +216,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Cart()
     {
-        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (userId == null)
         {
             //Sayfada kullanıcı girişi yapmamışsa boş sepet döndür, sepet count'larını gösterdiğimizden dolayı çökmemesi için boş bir model döndürmemiz lazım.
@@ -233,12 +233,35 @@ public class HomeController : Controller
 
         return View(model);
     }
-    public async Task<IActionResult> CreateOrder()
+    public IActionResult CreateOrder()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> CreateOrder(OrderViewModel orderViewModel)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (userId == null)
+        {
+            return RedirectToAction("Login");
+        }
         try
         {
-            var order = await _orderService.CreateOrderAsync(userId);
+            var order = new Order
+            {
+                City = orderViewModel.City,
+                District = orderViewModel.District,
+                PostalCode = orderViewModel.PostalCode,
+                OrderNote = orderViewModel.OrderNote,
+                DeliveryAddress = orderViewModel.DeliveryAddress,
+                BillingAddress = orderViewModel.BillingAddress
+            };
+            await _orderService.CreateOrderAsync(userId, order.City, order.District, order.PostalCode, order.OrderNote, order.DeliveryAddress, order.BillingAddress);
             return RedirectToAction("OrderConfirmation", new { orderId = order.Id });
         }
         catch (InvalidOperationException ex)
@@ -247,7 +270,6 @@ public class HomeController : Controller
             return RedirectToAction("Index", "Home");
         }
     }
-
     public async Task<IActionResult> OrderConfirmation(int orderId)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -271,7 +293,8 @@ public class HomeController : Controller
     public async Task<IActionResult> UserOrderDetails(int orderId)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var order = await _orderService.GetOrderDetailsAsync(userId, orderId);
+
+        var order = await _orderService.GetOrderDetailsByUserAsync(userId, orderId);
 
         if (order == null)
         {
@@ -280,4 +303,6 @@ public class HomeController : Controller
 
         return View(order);
     }
+
+
 }

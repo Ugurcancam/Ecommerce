@@ -19,14 +19,16 @@ namespace Ecommerce.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IService<ProductFeature> _productFeatureService;
         private readonly IAltCategoryService _altCategoryService;
+        private readonly IOrderService _orderService;
         private IMapper _mapper;
 
-        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService, IAltCategoryService altCategoryService)
+        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService, IAltCategoryService altCategoryService, IOrderService orderService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _altCategoryService = altCategoryService;
             _productFeatureService = productFeatureService;
+            _orderService = orderService;
             _mapper = mapper;
         }
 
@@ -138,6 +140,15 @@ namespace Ecommerce.Web.Controllers
             var altCategory = await _altCategoryService.GetByIdAsync(id);
             await _altCategoryService.RemoveAsync(altCategory);
             return RedirectToAction("AltCategories");
+        }
+
+        public async Task<IActionResult> Orders()
+        {
+            return View( await _orderService.GetAllWithUsers());
+        }
+        public async Task<IActionResult> OrderDetail(int orderId)
+        {
+            return View(_mapper.Map<OrderViewModel>(await _orderService.GetOrderDetailsAsync(orderId)));
         }
     }
 }
