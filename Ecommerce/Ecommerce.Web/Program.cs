@@ -31,6 +31,7 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<PaymentService>();
 
 
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);

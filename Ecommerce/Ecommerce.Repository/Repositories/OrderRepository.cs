@@ -21,6 +21,7 @@ namespace Ecommerce.Repository.Repositories
                                         .Where(o => o.UserId == userId)
                                         .Include(o => o.OrderItems)
                                         .ThenInclude(oi => oi.Product)
+                                        .AsNoTracking()
                                         .ToListAsync();
         }
         public async Task<Order> GetOrderDetailsByUserAsync(string userId, int orderId)
@@ -30,7 +31,7 @@ namespace Ecommerce.Repository.Repositories
                                 .Include(order => order.User)
                                 .Include(order => order.OrderItems)
                                 .ThenInclude(item => item.Product)
-                                .FirstOrDefaultAsync();
+                                .FirstOrDefaultAsync(); 
         }
         public async Task<Order> GetOrderDetailsAsync(int orderId)
         {
@@ -44,7 +45,7 @@ namespace Ecommerce.Repository.Repositories
 
         public async Task<IEnumerable<Order>> GetAllWithUsers()
         {
-            return await _context.Orders.Include(order => order.User).ToListAsync();
+            return await _context.Orders.Include(order => order.User).AsNoTracking().ToListAsync();
         }
     }
 }

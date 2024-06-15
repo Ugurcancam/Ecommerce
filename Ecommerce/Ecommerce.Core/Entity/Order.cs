@@ -15,7 +15,7 @@ namespace Ecommerce.Core.Entity
         public string? BillingAddress { get; set; }
         public string OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
         //İlişkisel
         public string UserId { get; set; }
         public AppUser User { get; set; }

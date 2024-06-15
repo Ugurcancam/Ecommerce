@@ -238,3 +238,5 @@ C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.W
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\obj\Debug\net7.0\ref\Ecommerce.Web.dll
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\obj\Debug\net7.0\Ecommerce.Web.sourcelink.json
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\Iyzipay.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\Newtonsoft.Json.dll

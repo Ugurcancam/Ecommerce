@@ -1,10 +1,11 @@
-@model IEnumerable<BasketItemViewModel>
-
+@model IEnumerable<BasketItemDto>
+@using System.Globalization;
 @{
     Layout = "_Layout";
     var basketItemCount = Model.Count();
     var imageCount = 0;
-    decimal total = 0.0m;
+    double total = 0;
+    string last = "0";
 }
 
 <!--start breadcrumb-->
@@ -36,9 +37,9 @@
             <div class="col-12 col-xl-8">
                 @foreach (var product in Model)
                 {
-                    var productTotalPrice = (decimal)(product.Price * product.Quantity);
+                    var productTotalPrice = (double)(product.Price * product.Quantity);
                     total += productTotalPrice;
-
+                    last = total.ToString("F2", CultureInfo.InvariantCulture);
                     imageCount++;
                     <div class="card rounded-0 mb-3">
                         <div class="card-body">
@@ -103,7 +104,8 @@
                         <hr>
                         <div class="hstack align-items-center justify-content-between fw-bold text-content">
                             <p class="mb-0">Toplam Tutar</p>
-                            <p class="mb-0">@total</p>
+
+                            <p class="mb-0">@last</p>
                         </div>
                         <div class="d-grid mt-4">
                             <a asp-action="CreateOrder" class="btn btn-dark btn-ecomm py-3 px-5">Create Order</a>

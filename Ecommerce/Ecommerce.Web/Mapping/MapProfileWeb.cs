@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Ecommerce.Core.Dtos;
 using Ecommerce.Core.Dtos.Category;
 using Ecommerce.Core.Entity;
 using Ecommerce.Web.Models;
@@ -13,12 +14,11 @@ namespace Ecommerce.Web.Mapping
     {
         public MapProfileWeb()
         {
-            CreateMap<Product, ProductViewModel>().ReverseMap();
-            CreateMap<Category, CategoryViewModel>().ReverseMap();
-            CreateMap<AltCategory, AltCategoryViewModel>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<AltCategory, AltCategoryDto>().ReverseMap();
             CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
-            CreateMap<Order,UserOrdersViewModel>().ReverseMap();
-            CreateMap<Order,OrderViewModel>().ReverseMap();
+            CreateMap<Order,OrderDto>().ReverseMap();
         }
     }
 }

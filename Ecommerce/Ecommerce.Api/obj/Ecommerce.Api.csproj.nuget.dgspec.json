@@ -265,6 +265,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
+            },
+            "Iyzipay": {
+              "target": "Package",
+              "version": "[2.1.61, )"
             }
           },
           "imports": [

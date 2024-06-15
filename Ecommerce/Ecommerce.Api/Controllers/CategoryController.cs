@@ -20,10 +20,6 @@ namespace Ecommerce.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("[action]/{categoryId}")]
-        public async Task<IActionResult> GetWithProductsByIdAsync(int categoryId)
-        {
-            return CreateActionResult(await _categoryService.GetWithProductsByIdAsync(categoryId));
-        }
+
     }
 }

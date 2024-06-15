@@ -17,6 +17,7 @@ namespace Ecommerce.Repository.Repositories
         public async Task<Basket> GetBasketByUserIdAsync(string userId)
         {
             return await _context.Baskets
+                .Include(b => b.User)
                 .Include(b => b.BasketItems)
                 .ThenInclude(bi => bi.Product)
                 .FirstOrDefaultAsync(b => b.UserId == userId);

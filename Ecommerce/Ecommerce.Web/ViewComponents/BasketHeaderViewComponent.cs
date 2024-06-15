@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ecommerce.Core.Dtos;
 using Ecommerce.Core.Services;
 using Ecommerce.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -24,20 +25,20 @@ namespace Ecommerce.Web.ViewComponents
             if (userId == null)
             {
                 //Sayfada kullanıcı girişi yapmamışsa boş sepet döndür, sepet count'larını gösterdiğimizden dolayı çökmemesi için boş bir model döndürmemiz lazım.
-                return View(new List<BasketItemViewModel>());
+                return View(new List<BasketItemDto>());
             }
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
             if (basket == null || basket.BasketItems == null)
             {
-                return View(new List<BasketItemViewModel>());
+                return View(new List<BasketItemDto>());
             }
-            var model = basket?.BasketItems?.Select(p => new BasketItemViewModel
+            var model = basket?.BasketItems?.Select(p => new BasketItemDto
             {
                 ProductId = p.ProductId,
                 Name = p.Product.Name,
                 Price = p.Product.Price,
                 Quantity = p.Quantity
-            }).ToList() ?? new List<BasketItemViewModel>();
+            }).ToList() ?? new List<BasketItemDto>();
 
             return View(model);
         }

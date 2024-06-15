@@ -14,6 +14,6 @@ namespace Ecommerce.Core.Entity
         public Product Product { get; set; }
 
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
     }
 }

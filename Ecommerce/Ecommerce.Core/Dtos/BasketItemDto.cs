@@ -2,15 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Ecommerce.Core.Entity;
 
-namespace Ecommerce.Web.Models
+namespace Ecommerce.Core.Dtos
 {
-    public class FavoriteProductViewModel
+    public class BasketItemDto
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
     }
 }

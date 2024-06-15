@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Ecommerce.Core.Dtos;
 using Ecommerce.Core.Dtos.Product;
 using Ecommerce.Core.Entity;
 using Ecommerce.Core.Services;
@@ -43,26 +44,26 @@ namespace Ecommerce.Web.Controllers
         }
         public async Task<IActionResult> AddProduct()
         {
-            var model = new ProductViewModel();
+            var model = new ProductDto();
             model.Categories = await _categoryService.GetAllAsync();
             model.AltCategories = await _altCategoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> AddProduct(ProductViewModel model)
+        public async Task<IActionResult> AddProduct(ProductDto model)
         {
             await _productService.AddAsync(_mapper.Map<Product>(model));
             return RedirectToAction("Products");
         }
         public async Task<IActionResult> UpdateProduct(int id)
         {
-            var model = _mapper.Map<ProductViewModel>(await _productService.GetByIdAsync(id));
+            var model = _mapper.Map<ProductDto>(await _productService.GetByIdAsync(id));
             model.Categories = await _categoryService.GetAllAsync();
             model.AltCategories = await _altCategoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct(ProductViewModel model)
+        public async Task<IActionResult> UpdateProduct(ProductDto model)
         {
             await _productService.UpdateAsync(_mapper.Map<Product>(model));
             return RedirectToAction("Products");
@@ -84,17 +85,17 @@ namespace Ecommerce.Web.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AddCategory(CategoryViewModel model)
+        public async Task<IActionResult> AddCategory(CategoryDto model)
         {
             await _categoryService.AddAsync(_mapper.Map<Category>(model));
             return RedirectToAction("Categories");
         }
         public async Task<IActionResult> UpdateCategory(int id)
         {
-            return View(_mapper.Map<CategoryViewModel>(await _categoryService.GetByIdAsync(id)));
+            return View(_mapper.Map<CategoryDto>(await _categoryService.GetByIdAsync(id)));
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateCategory(CategoryViewModel model)
+        public async Task<IActionResult> UpdateCategory(CategoryDto model)
         {
             await _categoryService.UpdateAsync(_mapper.Map<Category>(model));
             return RedirectToAction("Categories");
@@ -113,24 +114,24 @@ namespace Ecommerce.Web.Controllers
         }
         public async Task<IActionResult> AddAltCategoryAsync()
         {
-            var model = new AltCategoryViewModel();
+            var model = new AltCategoryDto();
             model.Categories = await _categoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> AddAltCategory(AltCategoryViewModel model)
+        public async Task<IActionResult> AddAltCategory(AltCategoryDto model)
         {
             await _altCategoryService.AddAsync(_mapper.Map<AltCategory>(model));
             return RedirectToAction("AltCategories");
         }
         public async Task<IActionResult> UpdateAltCategory(int id)
         {
-            var model = _mapper.Map<AltCategoryViewModel>(await _altCategoryService.GetByIdAsync(id));
+            var model = _mapper.Map<AltCategoryDto>(await _altCategoryService.GetByIdAsync(id));
             model.Categories = await _categoryService.GetAllAsync();
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAltCategory(AltCategoryViewModel model)
+        public async Task<IActionResult> UpdateAltCategory(AltCategoryDto model)
         {
             await _altCategoryService.UpdateAsync(_mapper.Map<AltCategory>(model));
             return RedirectToAction("AltCategories");
@@ -148,7 +149,7 @@ namespace Ecommerce.Web.Controllers
         }
         public async Task<IActionResult> OrderDetail(int orderId)
         {
-            return View(_mapper.Map<OrderViewModel>(await _orderService.GetOrderDetailsAsync(orderId)));
+            return View(_mapper.Map<OrderDto>(await _orderService.GetOrderDetailsAsync(orderId)));
         }
     }
 }

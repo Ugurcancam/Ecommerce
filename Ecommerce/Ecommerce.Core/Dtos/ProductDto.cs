@@ -4,19 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Core.Entity;
 
-namespace Ecommerce.Web.Models
+namespace Ecommerce.Core.Dtos
 {
-    public class ProductViewModel
+    public class ProductDto : BaseDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public int Stock { get; set; }
         public bool? InStock { get; set; }
         public bool? IsActive { get; set; }
         public string Color { get; set; } // ProductFeature property
-        
+
         // public string? ImageUrl { get; set; }
         // public string? ImageUrl2 { get; set; }
         // public string? ImageUrl3 { get; set; }
@@ -26,11 +25,11 @@ namespace Ecommerce.Web.Models
 
         //İlişkisel
         public int CategoryId { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public Entity.Category category { get; set; }
+        public IEnumerable<Entity.Category> Categories { get; set; }
         public int AltCategoryId { get; set; }
         public IEnumerable<AltCategory> AltCategories { get; set; }
-        public Product Product { get; set; }
-        public List<Product> SimilarProducts { get; set; }
-
+        public Entity.Product Product { get; set; }
+         public List<Entity.Product> SimilarProducts { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Core.Entity;
 
-namespace Ecommerce.Web.Models
+namespace Ecommerce.Core.Dtos
 {
-    public class OrderViewModel
+    public class OrderDto
     {
         public int Id { get; set; }
         public string City { get; set; }
@@ -17,7 +17,7 @@ namespace Ecommerce.Web.Models
         public string? BillingAddress { get; set; }
         public string OrderNumber { get; set; }
         public DateTime OrderDate { get; set; }
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
         //İlişkisel
         public string UserId { get; set; }
         public AppUser User { get; set; }

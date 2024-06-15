@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecommerce.Core.Dtos;
 using Ecommerce.Core.Entity;
 using Ecommerce.Core.Repositories;
 using Ecommerce.Core.Services;
@@ -27,7 +28,7 @@ namespace Ecommerce.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Order> CreateOrderAsync(string userId, string city, string district, string postalCode, string? orderNote, string deliveryAddress, string? billingAddress)
+        public async Task<Order> CreateOrderAsync(string userId, OrderDto orderDto)
         {
             var user = await _userService.GetUserByIdAsync(userId);
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
@@ -42,12 +43,12 @@ namespace Ecommerce.Service.Services
                 UserId = userId,
                 User = user,
                 OrderDate = DateTime.Now,
-                City = city,
-                District = district,
-                PostalCode = postalCode,
-                OrderNote = orderNote,
-                DeliveryAddress = deliveryAddress,
-                BillingAddress = billingAddress,
+                City = orderDto.City,
+                District = orderDto.District,
+                PostalCode = orderDto.PostalCode,
+                OrderNote = orderDto.OrderNote,
+                DeliveryAddress = orderDto.DeliveryAddress,
+                BillingAddress = orderDto.BillingAddress,
                 OrderNumber = "#" + new Random().Next(111111, 999999).ToString(),
                 TotalAmount = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price),
                 OrderItems = basket.BasketItems.Select(bi => new OrderItem
