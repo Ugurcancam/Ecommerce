@@ -189,6 +189,80 @@ namespace Ecommerce.Repository.Migrations
                     b.ToTable("BasketItems");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entity.Blog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BlogCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CardDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaCanonical")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaOgDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaOgTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PageDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogCategoryId");
+
+                    b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entity.BlogCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogCategories");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entity.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -247,6 +321,9 @@ namespace Ecommerce.Repository.Migrations
                     b.Property<string>("BillingAddress")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("CargoPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -259,6 +336,9 @@ namespace Ecommerce.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
@@ -266,6 +346,17 @@ namespace Ecommerce.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderState")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -532,6 +623,15 @@ namespace Ecommerce.Repository.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.Entity.Blog", b =>
+                {
+                    b.HasOne("Ecommerce.Core.Entity.BlogCategory", "BlogCategory")
+                        .WithMany("Blogs")
+                        .HasForeignKey("BlogCategoryId");
+
+                    b.Navigation("BlogCategory");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.Entity.Favorite", b =>
                 {
                     b.HasOne("Ecommerce.Core.Entity.Product", "Product")
@@ -677,6 +777,11 @@ namespace Ecommerce.Repository.Migrations
             modelBuilder.Entity("Ecommerce.Core.Entity.Basket", b =>
                 {
                     b.Navigation("BasketItems");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.Entity.BlogCategory", b =>
+                {
+                    b.Navigation("Blogs");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.Entity.Category", b =>

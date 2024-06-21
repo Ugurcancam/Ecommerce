@@ -1,4 +1,5 @@
 using System.Reflection;
+using Ecommerce.Core.Dtos;
 using Ecommerce.Core.Entity;
 using Ecommerce.Core.Repositories;
 using Ecommerce.Core.Services;
@@ -10,6 +11,7 @@ using Ecommerce.Service.Mapping;
 using Ecommerce.Service.Services;
 using Ecommerce.Web.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,13 +33,24 @@ builder.Services.AddScoped<IBasketService, BasketService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<PaymentService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
+builder.Services.AddScoped<IBlogCategoryService, BlogCategoryService>();
 
+builder.Services.AddScoped<PaymentService>();
+builder.Services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromMinutes(30);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
 
 builder.Services.AddAutoMapper(typeof(MapProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(MapProfileWeb).Assembly);
 
-builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.Configure<IyzipayOptions>(builder.Configuration.GetSection("IyzipayOptions"));
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -62,7 +75,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

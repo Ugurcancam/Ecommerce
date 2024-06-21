@@ -1,0 +1,54 @@
+@model IEnumerable<Order>
+
+<div class="wg-box">
+    <div class="flex items-center justify-between">
+        <h5>Son Siparişler</h5>
+        <div class="dropdown default">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <span class="icon-more"><i class="icon-more-horizontal"></i></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a href="javascript:void(0);">This Week</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">Last Week</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="wg-table table-customers">
+        <ul class="table-title flex gap10 mb-14">
+            <li>
+                <div class="body-title">Sipariş No</div>
+            </li>
+            <li>
+                <div class="body-title">Kullanıcı</div>
+            </li>
+            <li>
+                <div class="body-title">Tutar</div>
+            </li>
+            <li>
+                <div class="body-title">Şehir</div>
+            </li>
+            <li>
+                <div class="body-title">Sipariş Tarihi</div>
+            </li>
+        </ul>
+        <div class="divider mb-22"></div>
+        <ul class="flex flex-column gap34">
+            @foreach (var order in Model)
+            {
+                <li class="item flex gap10 items-center ">
+                    <div class="body-text">@order.OrderNumber</div> 
+
+                    <div class=" body-text">@order.User.Name @order.User.Surname</div>
+                    <div class="body-text">@order.TotalAmount₺</div> 
+                    <div class="body-text">@order.City</div>
+                    <div class="body-text">@order.OrderDate.ToString("dd.MM.yyyy HH:mm")</div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -210,6 +210,7 @@
 
 
     <!-- JavaScript files -->
+    @await RenderSectionAsync("Scripts", required: false)
     <script src="~/home_assets/js/bootstrap.bundle.min.js"></script>
     <script src="~/home_assets/js/jquery.min.js"></script>
     <script src="~/home_assets/plugins/slick/slick.min.js"></script>

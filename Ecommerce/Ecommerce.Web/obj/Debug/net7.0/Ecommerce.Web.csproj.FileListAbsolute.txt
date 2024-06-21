@@ -240,3 +240,4 @@ C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.W
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\obj\Debug\net7.0\Ecommerce.Web.sourcelink.json
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\Iyzipay.dll
 C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\ugurc\OneDrive\Belgeler\GitHub\ECommerce-with-API\Ecommerce\Ecommerce.Web\bin\Debug\net7.0\HtmlAgilityPack.dll

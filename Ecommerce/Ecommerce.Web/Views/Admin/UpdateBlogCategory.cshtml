@@ -1,0 +1,84 @@
+@model BlogCategoryDto
+@{
+    Layout = "_LayoutAdmin";
+}
+@section Scripts {
+    <script src="~/admin_assets/js/tinymce/tinymce.min.js"></script>
+    <script src="~/admin_assets/js/tinymce/tinymce-custom.js"></script>
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Blog Ekle</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="index.html">
+                        <div class="text-tiny">Ana Sayfa</div>
+                    </a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="text-tiny">Blog</div>
+                    </a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Blog Ekle</div>
+                </li>
+            </ul>
+        </div>
+        <!-- new-page-wrap -->
+        <form class="form-new-page" method="post" asp-action="UpdateBlogCategory">
+            <div class="new-page-wrap">
+                <div class="left">
+                    <div class="wg-box">
+                        <div class="widget-tabs">
+                            <ul class="widget-menu-tab">
+                                <li class="item-title active">
+                                    <span class="inner">
+                                        <h6>Detay</h6>
+                                    </span>
+                                </li>
+                            </ul>
+                            <div class="widget-content-tab">
+                                <div class="widget-content-inner active">
+                                    <fieldset class="name mb-24">
+                                        <div class="body-title mb-10">Başlık <span class="tf-color-1">*</span></div>
+                                        <input class="" type="text" placeholder="Name" required="" asp-for="Title">
+                                        <input class="" type="hidden" asp-for="Id">
+                                    </fieldset>
+                                    @* <fieldset class="text mb-24">
+                                    <div class="body-title mb-10">Url <span class="tf-color-1">*</span></div>
+                                    <input class="" type="text"
+                                    placeholder="https://themeforest.net/user/themesflat" name="text"
+                                    aria-required="true" required="">
+                                    </fieldset> *@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="right">
+                    <div class="wg-box">
+                        <div>
+                            <div class="body-title mb-10">Yayınla</div>
+                            <div class="flex gap10">
+                                <button class="tf-button style-1 w-full" type="submit">View</button>
+                                <button class="tf-button w-full" type="submit">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- /new-page-wrap -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>

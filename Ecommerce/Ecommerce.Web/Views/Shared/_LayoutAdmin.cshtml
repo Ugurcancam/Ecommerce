@@ -46,8 +46,8 @@
             <div class="layout-wrap">
                 <!-- /preload -->
                 <!-- section-menu-left -->
-                 @await Html.PartialAsync("_NavbarAdmin")
-               
+                @await Html.PartialAsync("_NavbarAdmin")
+
                 <!-- /section-menu-left -->
                 <!-- section-content-right -->
                 <div class="section-content-right">
@@ -61,7 +61,7 @@
                         <!-- /main-content-wrap -->
                         <!-- bottom-page -->
                         @await Html.PartialAsync("_FooterAdmin")
-                      
+
                         <!-- /bottom-page -->
                     </div>
                     <!-- /main-content -->
@@ -75,6 +75,7 @@
     <!-- /#wrapper -->
 
     <!-- Javascript -->
+    @await RenderSectionAsync("Scripts", required: false)
     <script src="~/admin_assets/js/jquery.min.js"></script>
     <script src="~/admin_assets/js/bootstrap.min.js"></script>
     <script src="~/admin_assets/js/bootstrap-select.min.js"></script>
@@ -89,6 +90,10 @@
     <!-- <script src="~/admin_assets/js/switcher.js"></script> -->
     <script src="~/admin_assets/js/theme-settings.js"></script>
     <script src="~/admin_assets/js/main.js"></script>
+    
+    @* Add blogda gormuyor bunları sonra tekrar denencek *@
+    <script src="~/admin_assets/js/tinymce/tinymce.min.js"></script>
+    <script src="~/admin_assets/js/tinymce/tinymce-custom.js"></script>
 
 </body>
 

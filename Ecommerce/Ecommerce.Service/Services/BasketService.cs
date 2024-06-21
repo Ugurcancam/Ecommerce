@@ -40,6 +40,10 @@ namespace Ecommerce.Service.Services
                     await _basketRepository.AddAsync(basket);
                     await _unitOfWork.CommitAsync();
                 }
+                if (basket.BasketItems == null)
+                {
+                    basket.BasketItems = new List<BasketItem>();
+                }
 
                 var basketItem = basket.BasketItems.FirstOrDefault(ci => ci.ProductId == productId);
                 if (basketItem != null)
@@ -104,6 +108,7 @@ namespace Ecommerce.Service.Services
                 if (basket != null)
                 {
                     var basketItem = basket.BasketItems.FirstOrDefault(ci => ci.ProductId == productId);
+
                     if (basketItem != null)
                     {
                         if (basketItem.Quantity > 1)

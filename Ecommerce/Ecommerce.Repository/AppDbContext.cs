@@ -24,6 +24,8 @@ namespace Ecommerce.Repository
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogCategory> BlogCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -76,45 +78,41 @@ namespace Ecommerce.Repository
         {
             foreach (var entry in ChangeTracker.Entries())
             {
-
-                if (entry.Entity is Product entity)
+                if (entry.Entity is Product productEntity)
                 {
                     // Product'den türeyen entity'lerde CreatedAt property'si eklenirken şuanki zamanı atıyoruz.
                     if (entry.State == EntityState.Added)
                     {
-                        entity.CreatedAt = DateTime.Now;
+                        productEntity.CreatedAt = DateTime.Now;
                     }
                     // Product'den türeyen entity'lerde CreatedAt property'si güncellenirken değişmemesi için CreatedAt property'si modifiye edilmez.
                     else if (entry.State == EntityState.Modified)
                     {
-                        Entry(entity).Property(x => x.CreatedAt).IsModified = false;
+                        Entry(productEntity).Property(x => x.CreatedAt).IsModified = false;
+                    }
+
+                    // Product entity'si eklenirken IsActive true olacak
+                    productEntity.IsActive = true;
+                    productEntity.InStock = true;
+                    if (productEntity.Stock == 0)
+                    {
+                        productEntity.InStock = false;
                     }
                 }
-                // Product entity'si eklenirken IsActive true olacak
-                if (entry.Entity is Product productEntity)
+                else if (entry.Entity is Blog blogEntity)
                 {
+                    // Blog'dan türeyen entity'lerde CreatedAt property'si eklenirken şuanki zamanı atıyoruz.
                     if (entry.State == EntityState.Added)
                     {
-                        productEntity.IsActive = true;
-                        productEntity.InStock = true;
-                        if (productEntity.Stock == 0)
-                        {
-                            productEntity.InStock = false;
-                        }
+                        blogEntity.CreateDate = DateTime.Now;
+                        blogEntity.Status = true;
                     }
+                    // Blog'dan türeyen entity'lerde CreatedAt property'si güncellenirken değişmemesi için CreatedAt property'si modifiye edilmez.
                     else if (entry.State == EntityState.Modified)
                     {
-                        if (productEntity.Stock == 0)
-                        {
-                            productEntity.InStock = false;
-                        }
-                        else if (productEntity.Stock > 0)
-                        {
-                            productEntity.InStock = true;
-                        }
+                        Entry(blogEntity).Property(x => x.CreateDate).IsModified = false;
                     }
                 }
-
             }
             return base.SaveChangesAsync(cancellationToken);
         }

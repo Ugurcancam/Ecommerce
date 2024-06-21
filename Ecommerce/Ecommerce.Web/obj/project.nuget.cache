@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c+NpPulx+7I9rXEfpOyR+a34qpkjX1lcmKD7RwHEw4170Cz2MAM6dHhIDyEL/tt9qjQ0hTPbnFYqk1tLzJy+Zw==",
+  "dgSpecHash": "KQVRhmHM+m02edlrgutIL69GLej7uMQjYjDa1H/Zd5upiSayQlIUDhoHU1GKrdz1fOcepOzi3t/MbXWkasBySg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ugurc\\OneDrive\\Belgeler\\GitHub\\ECommerce-with-API\\Ecommerce\\Ecommerce.Web\\Ecommerce.Web.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\ugurc\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\ugurc\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ugurc\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\ugurc\\.nuget\\packages\\htmlagilitypack\\1.11.61\\htmlagilitypack.1.11.61.nupkg.sha512",
     "C:\\Users\\ugurc\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ugurc\\.nuget\\packages\\iyzipay\\2.1.61\\iyzipay.2.1.61.nupkg.sha512",
     "C:\\Users\\ugurc\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
@@ -106,7 +107,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Ecommerce.Core depends on Microsoft.AspNetCore.Identity.EntityFrameworkCore (>= 7.0.0-preview.4.24267.6) but Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.4.24267.6 was not found. An approximate best match of Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.5.22303.8 was resolved.",
+      "message": "Ecommerce.Core, Microsoft.AspNetCore.Identity.EntityFrameworkCore (>= 7.0.0-preview.4.24267.6) öğesine bağımlı ancak Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.4.24267.6 bulunamadı. Yaklaşık bir en iyi eşleşme olan Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.0-preview.5.22303.8 çözümlendi.",
       "libraryId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
       "targetGraphs": [
         "net7.0"

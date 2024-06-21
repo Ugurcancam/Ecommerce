@@ -21,15 +21,19 @@ namespace Ecommerce.Web.Controllers
         private readonly IService<ProductFeature> _productFeatureService;
         private readonly IAltCategoryService _altCategoryService;
         private readonly IOrderService _orderService;
+        private readonly IBlogService _blogService;
+        private readonly IBlogCategoryService _blogCategoryService;
         private IMapper _mapper;
 
-        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService, IAltCategoryService altCategoryService, IOrderService orderService)
+        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper, IService<ProductFeature> productFeatureService, IAltCategoryService altCategoryService, IOrderService orderService, IBlogService blogService, IBlogCategoryService blogCategoryService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _altCategoryService = altCategoryService;
             _productFeatureService = productFeatureService;
             _orderService = orderService;
+            _blogService = blogService;
+            _blogCategoryService = blogCategoryService;
             _mapper = mapper;
         }
 
@@ -143,13 +147,90 @@ namespace Ecommerce.Web.Controllers
             return RedirectToAction("AltCategories");
         }
 
-        public async Task<IActionResult> Orders()
+        public async Task<IActionResult> CargoPendingOrders()
         {
-            return View( await _orderService.GetAllWithUsers());
+            return View(await _orderService.GetCargoPendingOrdersWithUser());
+        }
+        public async Task<IActionResult> ShippedOrders()
+        {
+            return View(await _orderService.GetShippedOrdersWithUser());
+        }
+        public async Task<IActionResult> DeliveredOrders()
+        {
+            return View(await _orderService.GetDeliveredOrdersWithUser());
         }
         public async Task<IActionResult> OrderDetail(int orderId)
         {
             return View(_mapper.Map<OrderDto>(await _orderService.GetOrderDetailsAsync(orderId)));
+        }
+
+        public async Task<IActionResult> Blogs()
+        {
+            var blogs = await _blogService.GetAllWithCategoryAsync();
+            return View(blogs);
+        }
+
+        public async Task<IActionResult> AddBlog()
+        {
+            var model = new BlogDto();
+            model.BlogCategories = await _blogCategoryService.GetAllAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddBlog(BlogDto model)
+        {
+            await _blogService.AddAsync(_mapper.Map<Blog>(model));
+            return RedirectToAction("Blogs");
+        }
+        public async Task<IActionResult> UpdateBlog(int id)
+        {
+            var blog = await _blogService.GetByIdAsync(id);
+            var model = _mapper.Map<BlogDto>(blog);
+            model.BlogCategories = await _blogCategoryService.GetAllAsync();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateBlog(BlogDto model)
+        {
+            await _blogService.UpdateAsync(_mapper.Map<Blog>(model));
+            return RedirectToAction("Blogs");
+        }
+        public async Task<IActionResult> RemoveBlog(int id)
+        {
+            var blog = await _blogService.GetByIdAsync(id);
+            await _blogService.RemoveAsync(blog);
+            return RedirectToAction("Blogs");
+        }
+        public async Task<IActionResult> BlogCategories()
+        {
+            var blogCategories = await _blogCategoryService.GetAllAsync();
+            return View(blogCategories);
+        }
+        public IActionResult AddBlogCategory()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddBlogCategory(BlogCategoryDto model)
+        {
+            await _blogCategoryService.AddAsync(_mapper.Map<BlogCategory>(model));
+            return RedirectToAction("BlogCategories");
+        }
+        public async Task<IActionResult> UpdateBlogCategory(int id)
+        {
+            return View(_mapper.Map<BlogCategoryDto>(await _blogCategoryService.GetByIdAsync(id)));
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateBlogCategory(BlogCategoryDto model)
+        {
+            await _blogCategoryService.UpdateAsync(_mapper.Map<BlogCategory>(model));
+            return RedirectToAction("BlogCategories");
+        }
+        public async Task<IActionResult> RemoveBlogCategory(int id)
+        {
+            var blogCategory = await _blogCategoryService.GetByIdAsync(id);
+            await _blogCategoryService.RemoveAsync(blogCategory);
+            return RedirectToAction("BlogCategories");
         }
     }
 }

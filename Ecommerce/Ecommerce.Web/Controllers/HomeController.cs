@@ -12,6 +12,9 @@ using Iyzipay.Model;
 using Ecommerce.Service.Services;
 using Ecommerce.Core.Dtos;
 using System.Globalization;
+using Newtonsoft.Json;
+using HtmlAgilityPack;
+using Microsoft.Extensions.Options;
 
 namespace Ecommerce.Web.Controllers;
 
@@ -27,8 +30,9 @@ public class HomeController : Controller
     private readonly ICategoryService _categoryService;
     private readonly IOrderService _orderService;
     private readonly PaymentService _paymentService;
+    private readonly IyzipayOptions _iyzipayOptions;
 
-    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService, ICategoryService categoryService, IOrderService orderService, PaymentService paymentService)
+    public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMapper mapper, IProductService productService, IFavoriteService favoriteService, IBasketService basketService, ICategoryService categoryService, IOrderService orderService, PaymentService paymentService, IOptions<IyzipayOptions> iyzipayOptions)
     {
 
         _userManager = userManager;
@@ -40,6 +44,7 @@ public class HomeController : Controller
         _categoryService = categoryService;
         _orderService = orderService;
         _paymentService = paymentService;
+        _iyzipayOptions = iyzipayOptions.Value;
     }
 
     public IActionResult Login()
@@ -238,7 +243,8 @@ public class HomeController : Controller
             Price = p.Product.Price,
             Quantity = p.Quantity
         }).ToList();
-
+        var orderGuid = "asdasd";
+        HttpContext.Session.SetString("orderGuid", orderGuid);
         return View(model);
     }
     public IActionResult CreateOrder()
@@ -250,25 +256,25 @@ public class HomeController : Controller
         }
         return View();
     }
-    [HttpPost]
-    public async Task<IActionResult> CreateOrder(OrderDto orderDto)
-    {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (userId == null)
-        {
-            return RedirectToAction("Login");
-        }
-        try
-        {
-            var newOrder = await _orderService.CreateOrderAsync(userId, orderDto);
-            return RedirectToAction("OrderConfirmation", new { orderId = newOrder.Id });
-        }
-        catch (InvalidOperationException ex)
-        {
-            ModelState.AddModelError("", ex.Message);
-            return RedirectToAction("Index", "Home");
-        }
-    }
+    // [HttpPost]
+    // public async Task<IActionResult> CreateOrder(OrderDto orderDto)
+    // {
+    //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    //     if (userId == null)
+    //     {
+    //         return RedirectToAction("Login");
+    //     }
+    //     try
+    //     {
+    //         var newOrder = await _orderService.CreateOrderAsync(userId, orderDto);
+    //         return RedirectToAction("OrderConfirmation", new { orderId = newOrder.Id });
+    //     }
+    //     catch (InvalidOperationException ex)
+    //     {
+    //         ModelState.AddModelError("", ex.Message);
+    //         return RedirectToAction("Index", "Home");
+    //     }
+    // }
     public async Task<IActionResult> OrderConfirmation(int orderId)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -312,69 +318,82 @@ public class HomeController : Controller
     {
         Payment payment = new Payment();
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var order = await _orderService.CreateOrderAsync(userId, orderDto);
+        var basket = await _basketService.GetBasketByUserIdAsync(userId);
+        var conversationId = Guid.NewGuid().ToString();
 
         // Initialize Iyzipay
-        Options options = new Options();
-        options.ApiKey = "78IGzDbwflVa3B9GyrY17PFswZ6301OY";
-        options.SecretKey = "bO0wewAQ80HNvJz37Jt2I3bX2mPHOAg6";
-        options.BaseUrl = "https://api.iyzipay.com";
+        Iyzipay.Options options = new Iyzipay.Options
+        {
+            ApiKey = _iyzipayOptions.ApiKey,
+            SecretKey = _iyzipayOptions.SecretKey,
+            BaseUrl = _iyzipayOptions.BaseUrl
+        };
 
-        CreatePaymentRequest request = new CreatePaymentRequest();
-        request.Locale = Locale.TR.ToString();
-        request.ConversationId = "123456789";
-        request.Price = order.TotalAmount.ToString("F2", CultureInfo.InvariantCulture);
-        request.PaidPrice = order.TotalAmount.ToString("F2", CultureInfo.InvariantCulture);
-        request.Currency = Currency.TRY.ToString();
-        request.Installment = 1;
-        request.BasketId = "B67832";
-        request.PaymentChannel = PaymentChannel.WEB.ToString();
-        request.PaymentGroup = PaymentGroup.PRODUCT.ToString();
-        request.CallbackUrl = Url.Action("Callback", "Home", null, Request.Scheme); // Update this line
+        CreatePaymentRequest request = new CreatePaymentRequest
+        {
+            Locale = Locale.TR.ToString(),
+            ConversationId = conversationId,
+            Price = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price).ToString("F2", CultureInfo.InvariantCulture),
+            PaidPrice = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price).ToString("F2", CultureInfo.InvariantCulture),
+            Currency = Currency.TRY.ToString(),
+            Installment = 1,
+            BasketId = "B67832",
+            PaymentChannel = PaymentChannel.WEB.ToString(),
+            PaymentGroup = PaymentGroup.PRODUCT.ToString(),
+            CallbackUrl = Url.Action("Callback", "Home", orderDto, Request.Scheme)
+        };
 
-        PaymentCard paymentCard = new PaymentCard();
-        paymentCard.CardHolderName = "Uğurcan Çam";
-        paymentCard.CardNumber = "5351777113909649";
-        paymentCard.ExpireMonth = "07";
-        paymentCard.ExpireYear = "2026";
-        paymentCard.Cvc = "616";
-        paymentCard.RegisterCard = 0;
+        PaymentCard paymentCard = new PaymentCard
+        {
+            CardHolderName = orderDto.CardHolderName,
+            CardNumber = orderDto.CardNumber,
+            ExpireMonth = orderDto.ExpireMonth,
+            ExpireYear = orderDto.ExpireYear,
+            Cvc = orderDto.CVV,
+            RegisterCard = 0
+        };
         request.PaymentCard = paymentCard;
 
-        Buyer buyer = new Buyer();
-        buyer.Id = "BY789";
-        buyer.Name = order.User.Name;
-        buyer.Surname = order.User.Surname;
-        buyer.GsmNumber = "+905365429628";
-        buyer.Email = order.User.Email;
-        buyer.IdentityNumber = order.User.Id;
-        buyer.LastLoginDate = "2015-10-05 12:43:35";
-        buyer.RegistrationDate = "2013-04-21 15:12:09";
-        buyer.RegistrationAddress = order.DeliveryAddress;
-        buyer.Ip = "85.34.78.112";
-        buyer.City = order.City;
-        buyer.Country = "Turkey";
-        buyer.ZipCode = order.PostalCode;
+        Buyer buyer = new Buyer
+        {
+            Id = "BY789",
+            Name = orderDto.Name,
+            Surname = orderDto.Surname,
+            GsmNumber = orderDto.PhoneNumber,
+            Email = "email@hotmail.com",
+            IdentityNumber = "1235673",
+            LastLoginDate = "2015-10-05 12:43:35",
+            RegistrationDate = "2013-04-21 15:12:09",
+            RegistrationAddress = orderDto.DeliveryAddress,
+            Ip = "85.34.78.112",
+            City = orderDto.City,
+            Country = "Turkey",
+            ZipCode = orderDto.PostalCode,
+        };
         request.Buyer = buyer;
 
-        Address shippingAddress = new Address();
-        shippingAddress.ContactName = order.User.Name + " " + order.User.Surname;
-        shippingAddress.City = order.City;
-        shippingAddress.Country = "Turkey";
-        shippingAddress.Description = order.DeliveryAddress;
-        shippingAddress.ZipCode = order.PostalCode;
+        Address shippingAddress = new Address
+        {
+            ContactName = orderDto.Name + " " + orderDto.Surname,
+            City = orderDto.City,
+            Country = "Turkey",
+            Description = orderDto.DeliveryAddress,
+            ZipCode = orderDto.PostalCode
+        };
         request.ShippingAddress = shippingAddress;
 
-        Address billingAddress = new Address();
-        billingAddress.ContactName = order.User.Name + " " + order.User.Surname;
-        billingAddress.City = order.City;
-        billingAddress.Country = "Turkey";
-        billingAddress.Description = order.BillingAddress;
-        billingAddress.ZipCode = order.PostalCode;
+        Address billingAddress = new Address
+        {
+            ContactName = orderDto.Name + " " + orderDto.Surname,
+            City = orderDto.City,
+            Country = "Turkey",
+            Description = orderDto.BillingAddress,
+            ZipCode = orderDto.PostalCode
+        };
         request.BillingAddress = billingAddress;
 
         List<Iyzipay.Model.BasketItem> basketItems = new List<Iyzipay.Model.BasketItem>();
-        foreach (var basketItem in order.OrderItems)
+        foreach (var basketItem in basket.BasketItems)
         {
             for (int i = 0; i < basketItem.Quantity; i++)
             {
@@ -392,16 +411,14 @@ public class HomeController : Controller
         request.BasketItems = basketItems;
         // Send the payment request
         ThreedsInitialize threedsInitialize = ThreedsInitialize.Create(request, options);
+
         _paymentService.PrintResponse<ThreedsInitialize>(threedsInitialize);
 
 
 
-
-        // Handle the redirect URL
-
         if (threedsInitialize.Status == "success")
         {
-            // Return the 3DS HTML content to be rendered in the user's browser
+            await _orderService.CreateOrderAsync(userId, conversationId, orderDto);
             return Content(threedsInitialize.HtmlContent, "text/html");
         }
         else
@@ -412,45 +429,48 @@ public class HomeController : Controller
         }
     }
     [HttpPost]
-    public ActionResult Callback()
+    public async Task<ActionResult> Callback()
     {
         try
         {
-            // Retrieve the payment token and conversation ID from the request
-            string paymentToken = Request.Form["paymentId"];
+            string paymentId = Request.Form["paymentId"];
             string conversationId = Request.Form["conversationId"];
+            System.Console.WriteLine("ConvIdCallback: " + conversationId);
 
-            if (string.IsNullOrEmpty(paymentToken) || string.IsNullOrEmpty(conversationId))
+            var order = await _orderService.GetByPaymentIdAsync(conversationId);
+            if (order == null)
             {
-                // Handle missing parameters
-                System.Console.WriteLine("Payment token or conversation ID is missing");
-                System.Console.WriteLine("Payment token: " + paymentToken);
-                System.Console.WriteLine("Conversation ID: " + conversationId);
+                System.Console.WriteLine("order is null");
+            }
+            System.Console.WriteLine(order.PaymentId);
+
+            if (string.IsNullOrEmpty(paymentId) || string.IsNullOrEmpty(conversationId))
+            {
+                Console.WriteLine("Payment token or conversation ID is missing");
                 return RedirectToAction("Failure");
             }
 
-            // Initialize Iyzipay
-            Options options = new Options
+            Iyzipay.Options options = new Iyzipay.Options
             {
-                ApiKey = "78IGzDbwflVa3B9GyrY17PFswZ6301OY",
-                SecretKey = "bO0wewAQ80HNvJz37Jt2I3bX2mPHOAg6",
-                BaseUrl = "https://api.iyzipay.com"
+                ApiKey = _iyzipayOptions.ApiKey,
+                SecretKey = _iyzipayOptions.SecretKey,
+                BaseUrl = _iyzipayOptions.BaseUrl
             };
-
             CreateThreedsPaymentRequest request = new CreateThreedsPaymentRequest
             {
                 Locale = Locale.TR.ToString(),
                 ConversationId = conversationId,
-                PaymentId = paymentToken
+                PaymentId = paymentId
             };
-
 
             ThreedsPayment threedsPayment = ThreedsPayment.Create(request, options);
 
-
             if (threedsPayment.Status == "success")
             {
-                // Payment successful
+
+                order.OrderState = OrderState.CargoPending;
+                order.IsPaid = true;
+                await _orderService.UpdateAsync(order);
                 return RedirectToAction("Success");
             }
             else
@@ -459,7 +479,6 @@ public class HomeController : Controller
                 Console.WriteLine("Error: " + threedsPayment.ErrorCode + " - " + threedsPayment.ErrorMessage);
                 return RedirectToAction("Failure");
             }
-
         }
         catch (Exception e)
         {

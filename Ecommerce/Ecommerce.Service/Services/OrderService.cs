@@ -28,7 +28,7 @@ namespace Ecommerce.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Order> CreateOrderAsync(string userId, OrderDto orderDto)
+        public async Task<Order> CreateOrderAsync(string userId, string paymentId, OrderDto orderDto)
         {
             var user = await _userService.GetUserByIdAsync(userId);
             var basket = await _basketService.GetBasketByUserIdAsync(userId);
@@ -49,8 +49,11 @@ namespace Ecommerce.Service.Services
                 OrderNote = orderDto.OrderNote,
                 DeliveryAddress = orderDto.DeliveryAddress,
                 BillingAddress = orderDto.BillingAddress,
+                OrderState = OrderState.PaymentPending,
+                PhoneNumber = orderDto.PhoneNumber,
                 OrderNumber = "#" + new Random().Next(111111, 999999).ToString(),
                 TotalAmount = basket.BasketItems.Sum(bi => bi.Quantity * bi.Product.Price),
+                PaymentId = paymentId,
                 OrderItems = basket.BasketItems.Select(bi => new OrderItem
                 {
                     ProductId = bi.ProductId,
@@ -101,6 +104,41 @@ namespace Ecommerce.Service.Services
         public async Task<IEnumerable<Order>> GetAllWithUsers()
         {
             return await _orderRepository.GetAllWithUsers();
+        }
+
+        public async Task<Order> GetByPaymentIdAsync(string paymentId)
+        {
+            return await _orderRepository.GetByPaymentIdAsync(paymentId);
+        }
+
+        public async Task<IEnumerable<Order>> GetCargoPendingOrdersWithUser()
+        {
+            return await _orderRepository.GetCargoPendingOrdersWithUser();
+        }
+
+        public async Task<IEnumerable<Order>> GetShippedOrdersWithUser()
+        {
+            return await _orderRepository.GetShippedOrdersWithUser();
+        }
+
+        public async Task<IEnumerable<Order>> GetDeliveredOrdersWithUser()
+        {
+            return await _orderRepository.GetDeliveredOrdersWithUser();
+        }
+
+        public async Task<IEnumerable<CityOrderCountDto>> GetMostOrderedCities()
+        {
+            return await _orderRepository.GetMostOrderedCities();
+        }
+
+        public async Task<IEnumerable<ProductOrderCountDto>> GetMostOrderedProducts()
+        {
+            return await _orderRepository.GetMostOrderedProducts();
+        }
+
+        public async Task<IEnumerable<Order>> GetLastFiveOrdersWithUser()
+        {
+            return await _orderRepository.GetLastFiveOrdersWithUser();
         }
     }
 }
