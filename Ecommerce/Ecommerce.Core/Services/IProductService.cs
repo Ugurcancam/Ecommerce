@@ -10,11 +10,11 @@ namespace Ecommerce.Core.Services
 {
     public interface IProductService : IService<Product>
     {
-        //For API
-        Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI();
         //For MVC
-        Task<List<ProductWithCategoryDto>> GetProductsWithCategory();
+        // Pagination support for MVC
+        Task<(List<ProductWithCategoryDto> Products, int TotalCount)> GetProductsWithCategory(int pageNumber, int pageSize);
         Task<List<Product>> GetActiveProductsWithCategory();
         Task<List<Product>> GetSimilarProducts(int categoryId);
+        Task<int> GetTotalProductsCount();
     }
 }

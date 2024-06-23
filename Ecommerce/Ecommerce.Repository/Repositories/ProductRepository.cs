@@ -14,20 +14,28 @@ namespace Ecommerce.Repository.Repositories
         {
         }
 
-        public async Task<List<Product>> GetProductsWithCategory()
+        public async Task<List<Product>> GetProductsWithCategory(int pageNumber, int pageSize)
         {
             //Eagar Loading, datayı çekerken kategorisini de çeker.
             //Productları ilk çektiğimizde kategorileri de çekersek bu işlemi eager loading ile yapmış oluruz.
-            return await _context.Products.Include(x => x.Category).ToListAsync();
+            return await _context.Products
+                                        .Include(x => x.Category)
+                                        .Skip((pageNumber - 1) * pageSize)
+                                        .Take(pageSize)
+                                        .ToListAsync();
         }
         public async Task<List<Product>> GetActiveProductsWithCategory()
         {
-            return await _context.Products.Where(x => x.IsActive == true).Include(x=> x.Category).ToListAsync();
+            return await _context.Products.Where(x => x.IsActive == true).Include(x => x.Category).ToListAsync();
         }
 
         public async Task<List<Product>> GetSimilarProducts(int categoryId)
         {
             return await _context.Products.Where(x => x.CategoryId == categoryId).OrderBy(x => Guid.NewGuid()).Take(5).ToListAsync();
+        }
+        public async Task<int> GetTotalProductsCount()
+        {
+            return await _context.Products.CountAsync();
         }
     }
 }

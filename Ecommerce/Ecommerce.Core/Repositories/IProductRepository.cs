@@ -8,8 +8,9 @@ namespace Ecommerce.Core.Repositories
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
-        Task<List<Product>> GetProductsWithCategory();
+        Task<List<Product>> GetProductsWithCategory(int pageNumber, int pageSize);
         Task<List<Product>> GetActiveProductsWithCategory();
         Task<List<Product>> GetSimilarProducts(int categoryId);
+        Task<int> GetTotalProductsCount();
     }
 }

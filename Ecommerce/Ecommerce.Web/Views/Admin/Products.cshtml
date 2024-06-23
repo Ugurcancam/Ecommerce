@@ -1,4 +1,4 @@
-@model List<ProductWithCategoryDto>
+@model ProductListViewModel
 @{
     Layout = "_LayoutAdmin";
 }
@@ -89,7 +89,7 @@
                     </li>
                 </ul>
                 <ul class="flex flex-column">
-                    @foreach (var product in Model)
+                    @foreach (var product in Model.Products)
                     {
 
 
@@ -101,14 +101,14 @@
                                 <div class="name">
                                     <a href="product-list.html" class="body-title-2">@product.Name</a>
                                 </div>
-                                <div class="body-text">@product.Id</div> 
+                                <div class="body-text">@product.Id</div>
                                 <div class="body-text">@product.Price₺</div>
                                 <div class="body-text">@product.Stock</div>
                                 <div class="body-text">@product.Category.Name</div>
-                                @if (product.InStock == true) 
+                                @if (product.InStock == true)
                                 {
                                     <div>
-                                        <div class="block-available">Stokta Var</div> 
+                                        <div class="block-available">Stokta Var</div>
                                     </div>
                                 }
                                 else if (product.InStock == false || product.Stock == 0)
@@ -140,23 +140,28 @@
             </div>
             <div class="divider"></div>
             <div class="flex items-center justify-between flex-wrap gap10">
-                <div class="text-tiny">Showing 10 entries</div>
+                <div class="text-tiny">Showing @Model.PageSize entries</div>
                 <ul class="wg-pagination">
-                    <li>
-                        <a href="#"><i class="icon-chevron-left"></i></a>
-                    </li>
-                    <li>
-                        <a href="#">1</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icon-chevron-right"></i></a>
-                    </li>
+                    @if (Model.PageNumber > 1)
+                    {
+                        <li>
+                            <a asp-action="Products" asp-route-pageNumber="@(Model.PageNumber - 1)"
+                                asp-route-pageSize="@Model.PageSize"><i class="icon-chevron-left"></i></a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="@(Model.PageNumber == i ? "active" : "")">
+                            <a asp-action="Products" asp-route-pageNumber="@i" asp-route-pageSize="@Model.PageSize">@i</a>
+                        </li>
+                    }
+                    @if (Model.PageNumber < Model.TotalPages)
+                    {
+                        <li>
+                            <a asp-action="Products" asp-route-pageNumber="@(Model.PageNumber + 1)"
+                                asp-route-pageSize="@Model.PageSize"><i class="icon-chevron-right"></i></a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

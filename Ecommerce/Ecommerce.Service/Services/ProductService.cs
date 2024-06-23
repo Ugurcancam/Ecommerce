@@ -32,12 +32,7 @@ namespace Ecommerce.Service.Services
         }
 
         //For API
-        public async Task<CustomResponseDto<List<ProductWithCategoryDto>>> GetProductsWithCategoryAPI()
-        {
-            var products = await _productRepository.GetProductsWithCategory();
-            var productsDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
-            return CustomResponseDto<List<ProductWithCategoryDto>>.Success(200, productsDto);
-        }
+
 
         public Task<List<Product>> GetSimilarProducts(int categoryId)
         {
@@ -45,11 +40,17 @@ namespace Ecommerce.Service.Services
         }
 
         //For MVC
-        async Task<List<ProductWithCategoryDto>> IProductService.GetProductsWithCategory()
+        public async Task<(List<ProductWithCategoryDto> Products, int TotalCount)> GetProductsWithCategory(int pageNumber, int pageSize)
         {
-            var products = await _productRepository.GetProductsWithCategory();
+            var products = await _productRepository.GetProductsWithCategory(pageNumber, pageSize);
+            var totalCount = await _productRepository.GetTotalProductsCount();
             var productsDto = _mapper.Map<List<ProductWithCategoryDto>>(products);
-            return productsDto;
+            return (productsDto, totalCount);
+        }
+
+        public async Task<int> GetTotalProductsCount()
+        {
+            return await _productRepository.GetTotalProductsCount();
         }
     }
 }

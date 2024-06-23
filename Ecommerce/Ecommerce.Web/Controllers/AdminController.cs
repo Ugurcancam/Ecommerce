@@ -42,9 +42,20 @@ namespace Ecommerce.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Products()
+        public async Task<IActionResult> Products(int pageNumber = 1, int pageSize = 10)
         {
-            return View(await _productService.GetProductsWithCategory());
+            var (products, totalCount) = await _productService.GetProductsWithCategory(pageNumber, pageSize);
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            var viewModel = new ProductListViewModel
+            {
+                Products = products,
+                PageNumber = pageNumber,
+                TotalPages = totalPages,
+                PageSize = pageSize
+            };
+
+            return View(viewModel);
         }
         public async Task<IActionResult> AddProduct()
         {
